@@ -23,3 +23,5 @@
 *.synctex.gz
 rapports
 node_modules
+out
+.idea
