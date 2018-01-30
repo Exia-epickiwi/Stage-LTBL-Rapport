@@ -3,20 +3,25 @@
 \usepackage[top=2.5cm,left=2.5cm,right=2.5cm,bottom=2.5cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[francais]{babel}
+\usepackage[french]{babel}
 \usepackage{graphicx}
+\usepackage{pdflscape}
 
-\title{Stage chez Let There Be Light \\ \large Rapport d'étonnement}
+\title{\includegraphics{logo.png}\vspace{2cm}\\Stage chez Let There Be Light \\ \large Rapport d'étonnement Exia A4}
 \date{23 Janvier 2018}
-\author{Baptiste \bsc{Saclier} \and Exia A3}
+\author{Stagiaire : Baptiste \bsc{Saclier} \\ Maître de stage : Benjamin \basc{Petit}\\Pilote de fromation : Julio \basc{Santilario}}
 
 \begin{document}
 
 \maketitle
 
-\vspace{3cm}
+\clearpage
 
 \tableofcontents
+
+\section{Introduction}
+
+%TODO introduction
 
 \clearpage
 
@@ -60,7 +65,7 @@ Les deux entreprises sont trés liés, elles partagent les même locaux et commu
 On retrouve alors Benjamin \bsc{Petit}, le gérant, et Corentin \bsc{Limoge} du coté LTBL.
 Benjamin s'occupe des conseils et de la gestion de l'entreprise.
 Il s'occupe aussi de l'aspect technique des installations par le choix des technologies de pointage et d'affichage.
-Corentin est employé par LTBL mais dispose d'un status d'auto-entrepreuneur, on peut alors le considèrer comme un prestataire.
+Corentin est employé par LTBL mais dispose d'un status d'auto-entrepreuneur, on peut alors le considèrer comme un consultant.
 Corentin est en charge du développement des applications qui seront éxécutés sur les installations.
 
 Du coté Vendredi 4 on retrouve Sylvie \bsc{Madamour}, la directrice, Salvatore \bsc{Barletta}, directeur artistique, et Sébastien \bsc{Veyre}, graphiste.
@@ -143,7 +148,7 @@ Quelques clients :
     \item Visiativ
     \item Courchevel
     \item Fête des lumières
-    \item Et bien d'autres\ldots
+    \item Et bien d'autres \ldots
 \end{itemize}
 
 \section{Intégration}
@@ -197,11 +202,155 @@ Cela suffit pour les équipes mais la periode à laquelle je suis arrivée est u
 Ainsi, des écrans tactile de grande taille on été livrés pour pouvoir tester en conditions réel les applications.
 De plus, au retour de la fète des lumières de Hong Kong, beaucoup de materiel comme des barres de LED et des vidéosprojecteurs ont été stockés dans les locaux.
 
+\paragraph{Cahier des charges} %TODO Pas de cahier des charges rédigé ?
+
 \section{Missions}
+
+Durant mon entretien, on m'a informé des technologies utilisées par l'entreprise dans les différents projets mis en place.
+On retrouve \emph{Open frameworks}, un ensemble de librairies en C++ permettant la creation d'applications interactives.
+L'entreprise utilise aussi beaucoup \emph{Electron}, une librairie permettant de concevoir des applications native a l'aide des technologies Web.
+Electron est très utilisé dans la creation d'interface car les langages web sont concus dans cet optique.
+De plus, Electron disposant du moteur de rendu Web de Chrome, il est possible d'utiliser des technologies récentes comme les Webcomponents\footnote{Les webcomponents sont des éléments HTML personnalisés crés par le développeur. Ils diposent de leur propre style et de leur propre logique développée en Javascript.}.
+
+Mon maitre de stage m'a fait part d'un problème qu'il aimerais que je travaille durant mon stage.
+Actuellement, les applications sont développés une à une sans reprendre d'éléments des anciens projets.
+L'objectif est donc de concevoir un framework générique permettant de créer des interfaces plus facilement et en évitant de recréer des éléments dejà créé.
+
+Ce framework nommé "Utopia" n'existe pas encore mais permetterais de produire des interfaces à l'aide de WebComponents génériques.
+Apres la creation de ce framework la creation de l'application se résumerais : à créer l'interface à l'aide des components génériques, à créer le style de l'application à l'aide d'un CSS spécifique et enfin à créer les éventuels WebComponents manquants.
 
 \subsection{Biomérieux}
 
+Ma première mission fut la creation d'une application permettant de présenter les produits de la société Biomérieux dans leurs showrooms.
+Apres discussion avec mon maitre de stage et le graphiste en charge du design de l'application j'ai pus en dégager les fonctionnalités à implémenter.
+
+\medskip
+
+\begin{itemize}
+    \item Une application présentant les produits, organisés en thématiques et familles
+    \item Chaque produit dispose d'une gallerie d'images permettant d'afficher plus d'informations à son sujet
+    \item Le client dispose d'un backoffice\footnote{Interface secondaire uniquement vue par l'administrateur permettant de gèrer les données de l'application.} permettant de gèrer les produits affichés.
+    \item Le design doit coller à la charte graphique imposée par Biomérieux et au design créé par le graphiste
+    \item L'interface doit être dynamique, animée et esthétique
+\end{itemize}
+
+\subsubsection{Technologies}
+
+Pour ce projet, j'ai utilisé \emph{Electron} qui permet de créer des interfaces facilement à l'aide des technologies Web.
+Cela permet d'avoir une interface simple à produire tout en ayant les fonctionnalités native comme le chargement de fichiers depuis le système.
+
+Pour le stockage des données, j'ai opté pour une base de données \emph{SQLite3} permettant un stockage dans un fichier sans serveur supperflu.
+En effet, SQLite est une librairie C mettant a disposition un langage SQL et un stockage de données dans un fichier.
+Cette technique est tres interessant dans notre case car les données ne seront uniquement utilisés par l'application.
+De plus l'application ne nécéssite pas de grandes performances et donc pas d'optimisation particulières que peuvent présenter les serveurs SGBDR comme MariaDB ou PostegreSQL.
+
+Enfin, pour gèrer ces données j'utilise \emph{Sequelize}, un ORM javascript permettant de communiquer avec la base de données.
+Cette librairie permet de représenter les données sous forme d'objets javascript pour éviter d'écrire les requètes à la main et ainsi avoir une meilleur intégration des données dans l'environnement Javascript.
+
+\subsubsection{Structure}
+
+Ce projet fut pour moi l'occasion d'éxpérimenter mon idée de la structure pour le framework "Utopia".
+Pour cette structure, j'ai puisé dans mes conaissances aquises durant ma formation pour concevoir un système en 3 blocks.
+
+\paragraph{Modèle} Le block de modele définissant les données à stocker dans une base de données relationnel standard.
+Pour ce faire j'utilise la librairie d'ORM \emph{Sequlize} ayant pour avantage d'être compatible avec la majeur partie des base de données relationnelles actuelles.
+Dans cet ORM, on doit définir un modèle, ce modèle sera utilisé pour créer les tables de la base de données.
+Le modèle est donc défini dans un unique fichier \texttt{model.js} permettant de centralisé leur déclarations.
+
+\paragraph{Backoffice} Le backoffice est un serveur web éxécuté au sein de l'application Electron.
+ce serveur web se base sur le modèle pour créer les formulaire de saisie des données.
+Le backoffice ne présente aucun code spécifique au modèle de biomérieux mais met en place une arborécense de formulaires générés en fonction du modèle défini par le développeur.
+Cette technique permet de réutiliser ce backoffice dans un tout autre contaxte.
+Ef effet, il suffit de changer le modèle pour que les formulaires de saisie changent dans le backoffice.
+
+\paragraph{Affichage client} L'affichage client représente tout ce qui va être afficha pér l'application éléctron sur le terminal.
+Cet affichage est le seul qui sera vu par les visiteurs du showroom.
+Dans l'archithecture utilisée c'est la seul partie spécifique.
+Dans cette partie, on utilise les WebComponents pour concevoir l'application.
+
+Parmis ces WebComponents, j'en ai créé des génériques permettant d'éfféctuer des taches de base.
+Parmis ces composants génériques on peut compter :
+\begin{itemize}
+    \item \texttt{<data-element>} permettant de faire une requète dans la base de données s'actualisant à chaque changement
+    \item \texttt{<page-router>} permettant d'afficher ou non une page en fonction de l'URL associé
+    \item \texttt{<animation-block>} permettant d'animer des éléments de l'interface en utilisant les transitions CSS
+\end{itemize}
+
+\begin{landscape}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.9]{Proposition-utopia.pdf}
+        \caption{Structure général de l'application Biomérieux}
+    \end{figure}
+\end{landscape}
+
+\clearpage
+
+\subsubsection{Design}
+
+Le design de cette application est fournis par le graphiste de vendredi 4 et se présente en une suite d'images représentant les différentes pages de l'application.
+Ce design présente aussi une vidéo permettant de se représenter les différentes animations de l'application.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.095]{bmx-1-initial.jpg}
+    \includegraphics[scale=0.19]{bmx-2-initial.jpg}
+    \includegraphics[scale=0.095]{bmx-3-initial.jpg}
+    \includegraphics[scale=0.095]{bmx-4-initial.jpg}
+    \caption{Design initial de l'application Biomérieux}
+\end{figure}
+
+Cependant, ce design à été fait en même temps que le remaniment de la charte graphique de la société.
+Il en resulte que ce design ne correspond pas à la nouvelle charte graphique et qu'il fallait de remanier pour qu'il se plie aux nouvelles directives, nouveau logo et nouvelle palette de couleur.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.095]{bmx-1-new.jpg}
+    \includegraphics[scale=0.095]{bmx-2-new.jpg}
+    \includegraphics[scale=0.095]{bmx-3-new.jpg}
+    \includegraphics[scale=0.095]{bmx-4-new.jpg}
+    \caption{Design renouvelé de l'application Biomérieux}
+\end{figure}
+
+\subsubsection{Conclusion}
+
+Ce projet fut une bonne introduction aux techniques des WebComponents et à la manière de travailler des équipes LTBL.
+
+Dans ce projet j'ai opté pour une strcture très classique ressemblant à un site Web.
+Avec la recul, je me rend compte qu'il y a peut être une solution plus simple et plus flexible et que la solution que j'ai porposée demnde trop de création pour pas grand chose.
+Par exemple, il n'est pas nécéssaire de penser les données en amont de l'application car, dans ce type d'installation, l'apparence finale prévaut sur le contenu.
+On peut imaginer un système ou l'on arrange des WebComponents au lieu de générer l'interface sur la base de données.
+
+Ce projet dure depuis 3 semaines et arriven bientot à son terme avec une première présentation au client le 7 férvier.
+
 \subsection{Installation au salon de l'entreprise du futur}
+
+Une partie du travaille chez LTBL passe par l'installation des systèmes développés chez le client.
+J'ai eu l'occasion de participer à l'installation d'un projet d'ecran transparent au salon de l'entreprise du futur.
+
+L'entreprise du futur est un collectif d'entreprise ayant pour objectif d'accompagner ces sentrprises dans la transformation numérique.
+A l'occasion du salon de l'entreprise du futur à la cité international, LTBL à produit 4 ecrans transparents permettant de mettre en valeur un produit placé a l'interieur.
+Le produit est alors entouré d'informations sur la société en question.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.3]{ecran-transparent.jpg}
+    \caption{Ecran transparent "Only Lyon" au salon de l'entreprise du futur}
+\end{figure}
+
+\subsubsection{Technologies}
+
+Pour l'affichage, on utilise des ecrans transparents disposant d'une plaque a cristaux liqudes permettant d'afficher des informations et d'un compartiment uniformément éclairé en blanc permettant d'y placer un produit.
+Sur cet écran s'affichent les informations sur le produit et des vidéos.
+
+Pour afficher toutes ces informations, on utilise un mini ordinateur Asus VivoStick sous Windows 10 avec un site internet affiché en plein ecran avec Google Chrome.
+
+Une enceinte USB est disposée au dessus de l'écran pour diffuser le son des vidéos.
+
+\subsubsection{Conclusion}
+
+Malgré que je n'ai pas travaillé sur ce projet, l'installation fut très interessant.
+Je n'avais jamais fait ce type d'intervention et j'ai appris beacuoup de choses sur les éléments à mettre en place pour éviter tout problème.
 
 \subsection{Blind Test}
 
