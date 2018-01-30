@@ -21,7 +21,10 @@
 
 \section{Introduction}
 
-%TODO introduction
+Dans le cadre de ma 3\up{e} année au CESI Exia, j'éfféctue actuellement un stage chez Let There Be Light.
+Cette entreprise réalise des dispositifs interactifs pour pour l'événementtiel, la communication et la culture.
+
+Ce rapport relate de ma découverte de cette entreprise, de mon intégration dans celle-ci et de mes premières missions en tant que stagiaire.
 
 \clearpage
 
@@ -123,7 +126,7 @@ Plus récemment, LTBL à participé à la fête des lumières de Hong Kong avec 
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.1]{long-striker.jpg}
+    \includegraphics[scale=0.15]{long-striker.jpg}
     \caption{L'installation "Long Striker" à la fête des lumières de Hong Kong}
 \end{figure}
 
@@ -202,7 +205,9 @@ Cela suffit pour les équipes mais la periode à laquelle je suis arrivée est u
 Ainsi, des écrans tactile de grande taille on été livrés pour pouvoir tester en conditions réel les applications.
 De plus, au retour de la fète des lumières de Hong Kong, beaucoup de materiel comme des barres de LED et des vidéosprojecteurs ont été stockés dans les locaux.
 
-\paragraph{Cahier des charges} %TODO Pas de cahier des charges rédigé ?
+\paragraph{Cahier des charges} Contrairement aux projets à l'EXIA et dans les autres entreprises que j'ai cotoyé, LTBL ne rédige pas de cahier des charges spécifique pour chaque projet.
+Les demandes du client sont relayés par les personnes en contact avec celui ci.
+Ainsi, les équipes LTBL mettent plus en avant la communication entre les membres que la lecture et l'écriture de fichiers de cahcier des charges.
 
 \section{Missions}
 
@@ -351,13 +356,99 @@ Une enceinte USB est disposée au dessus de l'écran pour diffuser le son des vi
 
 Malgré que je n'ai pas travaillé sur ce projet, l'installation fut très interessant.
 Je n'avais jamais fait ce type d'intervention et j'ai appris beacuoup de choses sur les éléments à mettre en place pour éviter tout problème.
+Que ce soit par les système empechant l'utilisateur de sortir de l'application de présentation ou par rapport a l'utilisation futur du projet.
 
-\subsection{Blind Test}
+\subsection{Blind Test AccorHotels}
+
+L'objectif de ce projet etait de créer une installation permettant de jouer à un Blind Test sur une écran de l'hotel a l'aide d'un IPad fournis.
+Le jeu est simple : Une chanson est jouée sur l'ecran et le titre de cette chanson est indiquée.
+Le joueur dispose alors de 45 secondes pour trouver l'artiste en question parmis les 4 proposés.
+On enchaine ainsi sur 6 questions qui se terminent sur un resultat affiché à l'utilisateur.
+
+Le défis sur ce projet fut la deadline.
+Pour pouvoir travailler sur des projets plus complexes et importants, Mon maitre de stage à mobilisé toute l'équipe LTBL composée de Corentin et moi-même pour terminer ce projets dans les plus brefs delais.
+Je me suis donc occupé du serveur de jeu quand corentin s'est occupé de l'affichage sur l'ecran et sur l'IPad.
+
+Ce projet fut l'occasion pour moi d'expérimenter le travail d'équipe dans cette entreprise.
+Il fallait que je définisse en premier l'interface de communication pour que corentin puisse l'utiliser pour afficher les données.
+Puis, concevoir le système de jeu le plus rapidement possible tout en etant sur que cela puisse s'adapter au mieux aux exigences présente et futur du client.
+
+\subsubsection{Téchnologies}
+
+Les technologies utilisés dans ce projet sont standard et etait déjà maitrisées par les membres de l'équipe.
+On retrouve alors une application \emph{Electron} pour l'affichage sur l'écran et un serveur NodeJS avec le framework \emph{Express} pour servir les fichiers et gèrer le jeu.
+Enfin, on utilise \emph{Socket.io} pour les WebSocket apportant de l'interactivité.
+
+\subsection{Structure}
+
+Le Blind Test se compose de 3 éléments.
+
+\paragraph{Le serveur Web} présent dans le processus principal de l'application Electron, le serveur Web gère tout le jeu du début a la fin.
+Il présente un serveur de fichiers permettant l'acces aux fichiers audio, aux fichier d'image et aux pages Web de l'IPad et de l'affichage.
+Il dispose aussi d'un serveur WebSockets permettant un communication bidirectionnel entre les clients (IPad et TV) et le serveur.
+
+Ce serveur Web dispose d'un etat définissant l'etat actuel du jeu.
+Cet état est transmit à tout les clients pour qu'il actuelisent leur affichagent.
+
+Le serveur Web construit en parralèle un objet Javascript \texttt{Game} contenant toutes les questions a poser, la question actuellement posée, les réponses des joueurs et le score.
+Cet objet \texttt{Game} est transmit à chaque client lors de leur connection ou lors du changement d'état du jeu.
+
+\paragraph{Les clients (TV et IPad)} Chacun charge une page HTML spécifique possèdant un script spécifique.
+Ce script va afficher le bon ecran en fonction de l'etat du jeu envoyé par le serveur.
+
+%TODO Finir ça !
+
+\subsubsection{Design}
+
+Le design de l'application etait founis avec la demande du client et nous avons juste intégré ce design en extrayant des images clé du fichier Photoshop du designer.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.12]{blind-test-tv.png}
+    \includegraphics[scale=0.22]{blind-test-ipad.png}
+    \caption{Une vue du Blind Test coté TV (à gauche) et coté IPad (à droite)}
+\end{figure}
+
+\subsubsection{Conclusion}
+
+Ce projet fut intéressant et intense car nous l'avons réalisé en seulement 2 jour.
+Ce fut une bonne experiance de travail d'équipe et m'a permis de tester un projet à court délai.
+L'installation est prévue pour le Lundi 29 Janvier.
 
 \section{Missions à venir}
 
+Apres ces projet, mon maitre de stage m'a proposé de travailler sur les projets suivants :
+
+\begin{itemize}
+    \item Amélioration d'une table tactile pour Malakoff Médéric : La mise en place d'un backoffice
+    \item Table tactile de chantier pour Eiffage
+    \item Site web de l'entreprise
+    \item Travail sur le framework "Utopia"
+    \item Mapping de LED en 3D
+\end{itemize}
+
 \section{Conclusion}
 
+Pour conclure, LTBL est un entreprise très différente des autres entreprises que j'ai pu cotoyer.
+Chez LTBL, les projets sont rapides et ne demandent pas de grande maintenance.
+De plus, la communication entre les membres de l'équipe est au centre des projets et le design un point important de chacune des installations.
+
+J'ai déjà travaillé sur 3 projets chez LTBL dont 2 du début à la fin.
+Le travail éfféctué m'a permis de remettre en question mes conception d'applications pour les adapter eu mieux aux demandes du client et aux deadlines imposés.
+J'ai déjà appris certaines techniques que je ne conaissait pas comme les WebComponents.
+
+Enfin, j'ai aussi découvert les installations des projets LTBL dans un salon et ce que l'on doit prendre en compte pour garantir une bonne experiance utilisateur.
+
 \section{Bilan}
+
+Ce stage est une trè bonne experiance dans un domaine que je ne connait pas et que j'ai rarement cotoyé, celui de l'interactivité.
+En effet, les applications que l'on à développé à l'école sont, en grande parte, destinées aux entreprises et le design, l'interactivité et l'attrai pour le grand public n'est pas une priorité.
+
+Aujourd'hui, dans ce stage j'ai l'occaction de travailler avec une équipe qui a des besoins tres différent des agences de communications standard.
+Chez LTBL, il n'y a pas de serveur de production et de responsive exigé sur les interfaces mais il y a d'autres contraintes qui sont le design et les animations.
+
+Ce nouveau paradigme me permet de remettre en question mes structures préconcues d'applications pour me faire réfléchir plus en profondeur sur les besoins du client et à mieux prendre en compte les besoins pour le projet.
+
+Malgré que les projets à venir soient aussi sur du Web j'espère pouvoir travailler sur des nouvelles technologies comme le jeu vidéo ou le Mapping Vidéo.
 
 \end{document}
