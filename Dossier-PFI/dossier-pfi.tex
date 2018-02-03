@@ -1,7 +1,232 @@
-\documentclass[11pt]{article}
+\documentclass{article}
+
+\usepackage[top=2.5cm,left=2.5cm,right=2.5cm,bottom=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{pdflscape}
+\usepackage[pdfborder={0 0 0}]{hyperref}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{eurosym}
+
+\newcommand{\question}[1]{\medskip\noindent\textbf{#1}\medskip}
+
+\newcommand{\mproperty}[2]{\hline\textbf{#1} & #2 \\}
+
+\newenvironment{metier}[1]{
+
+\def\arraystretch{1.5}
+\addcontentsline{toc}{subsection}{\protect\numberline{}#1}\par
+\tabularx{\textwidth}{|l|X|}
+\hline
+\multicolumn{2}{|c|}{\textbf{\large#1}}\\
+
+}{\hline\endtabularx}
+
+\title{\includegraphics[scale=0.1]{exia.png}\vspace{2cm}\\Dossier PFI}
+\date{3 fevrier 2018}
+\author{Baptiste \bsc{Saclier}\\Pilote de formation : Julio \bsc{Santilario}}
 
 \begin{document}
 
+    \maketitle
 
+    \clearpage
+
+    \tableofcontents
+
+    \section{Introduction}
+
+    Depuis le début de ma formation, j'ai eu l'occasion de découvrir beaucoup de poste accessible apres un diplome d'ingènieur en informatique.
+    L'abondance de domaine dans lesquel il est possible d'exercer rend ce métier toujours plus interessant.
+    Mais aujourd'hui, la fin de la formation arrivant dans 2 ans, il est temps pour moi de trouver le poste dans lequel j'ai envie d'exercer.
+
+    Grace à la pédagogie de l'école, j'ai eu l'occasion de faire 3 stage dans l'informatique pour observer, de l'interieur, les différents métiers que l'on peut exercer et les différentes structures que l'on peut rejoindre.
+
+    Ce rapport rassemble deux interview d'ingénieurs dans 2 domaine tres différents et dans 2 structures tres différentes.
+    Mais aussi des fiches métier sur les postes qui m'interessent pour que je puisse constater les compétences que je peux développer pour les atteindre et les compétences que ces étiers peuvent m'apporter.
+
+    \clearpage
+
+    \section{Interview d'ingénieurs}
+
+    %TODO Une introduction
+
+    \subsection{Olivier \bsc{Fabre}}
+
+    Olivier est ingénieur chez Alcatel Submarie Networks.
+    Cette entreprise conçoit et fabrique les cables de fibre optique sous marins qui permettent de transmettre les données de continent en continets.
+    Elle s'occupe aussi de la gestion de stations a sol qui nécéssitent de gèrer ces données.
+
+    \question{Dans quel service travailles tu au sein de ton entreprise ?}
+
+    Je travail dans le service de Spécifications \& Archithecture.
+    Dans ce service, je développe les spécifications téchniques pour le communication dans les cables et entre les équipements réseau des stations.
+
+    \question{Combien de collaborateurs il y a t’il dans ton entreprise ? dans ton service ?}
+
+    Il y a 600 employés dans l'entreprise entière et je travaille avec 20 d'entre eux.
+
+    \question{Dans quel secteur d'activité évolue ton service et ton entreprise ?}
+
+    Mon service est un service de Recherches et Développement dans les cables sous-marins pour determiner les technologies qui seront utilisés dans les produits de demain.\\
+    L'entreprise met à disposition de ses clients des solutions clé en main permettant de transporter les données dans des câbles sous-marins.
+
+    \question{Quel fonction occupes tu dans cette entreprise ?}
+
+    Je suis ingénieur en Apecifications et Archithecture dans le domaine de cables sous-marins et des réseau associés.
+    Je fait des recherches sur les fonctionnalités à venir sur les produits à +4 ans.
+    Ces fonctionnalités seront implémentés dans les futurs équipements réseaux des cables sous-marins.
+
+    \question{Depuis combien de temps tu es dans cette entreprise ? et à ce poste ?}
+
+    Cela fait 12 ans que je suis dans l'entreprise et 2 ans que je suis à ce poste.
+
+    \question{Qu'as-tu fait avant d'arriver à ce poste ? Dans quel entreprise as-tu travaillé ? A quel poste ?}
+
+    J'ai d'abord été ingénieur en intégration des réseaux terrestres chez Alcatel-Lucent.
+    Je travaillais sur la mise en place des réseaux terrestres permettant de transmettre les données a grande vitesse sur le continent.
+    Puis, je suis devenu ingénieur en integration des réseaux sous-marins chez ASN.
+    Ici, je travaillais sur la mise en place des réseaux sous-marins qui font transiter les informations entre les continents.
+
+    \question{Quels sont les compétences que tu utilises au quotidien au poste que tu occupes ?}
+
+    Dans mon poste de R\&D il faut être créatif pour trouver les futurs technologies et aussi savoir faire un peu de développement pour la Preuve de concept.
+    Il faut montrer que notre idée est faisable et on ne peut pas mobiliser des développeurs qui ont surement mieux à faire.
+
+    \question{Utilises-tu des outils particulier dans le cadre de ton travail ?}
+
+    J'utilise un logiciel UML pour concevoir graphiquement la structure et aussi "requierements".
+    Pour la communication, j'utilise Skype et les mails avec Outlook.
+    Pour mes missions quotidiennes, j'utilise la suite office et quelques logiciels internes développés pour nos besoins.
+
+    \question{Comment se découpe ta semaine ?}
+
+    Je passe 70\% de mon temps à la réflexion pour les spécifications, 25\% à faire des réunions et les 5\% restants sont des tâches administratives.
+
+    \clearpage
+
+    \subsection{Benjamin \bsc{Petit}}
+
+    Benjamin est directeur chez Let There Be Light.
+    Cette entreprise crée des installations interactives pour le privé, la culture ou pour cerains événements.
+
+    \question{Dans quel service travailles tu au sein de ton entreprise ?}
+
+    Je travaille à la direction de l'entreprise que j'ai créé.
+
+    \question{Combien de collaborateurs il y a t’il dans ton entreprise ? dans ton service ?}
+
+    3 personnes travaillent dans cette entreprise et je suis seul à la direction.
+
+    \question{Dans quel secteur d'activité évolue ton service et ton entreprise ?}
+
+    Je driais que LTBL se situe dans la communication digitale.
+    On crée des installations comme des tables tactiles, des structures interactives, des mappings vidéo, etc. pour des clients comme les entreprises ou la Fête des Lumières.
+
+    \question{Quel fonction occupes tu dans cette entreprise ?}
+
+    Je suis le directeur général de LTBL, je récupère les contacts et je définis les projets que l'on va réaliser.
+
+    \question{Depuis combien de temps tu es dans cette entreprise ? et à ce poste ?}
+
+    J'ai créé l'entrprise il y a 4 ans et j'ai toujours été directeur.
+    J'etait co-directeur pendant les 2 première années.
+
+    \question{Qu'as-tu fait avant d'arriver à ce poste ? Dans quel entreprise as-tu travaillé ? A quel poste ?}
+
+    J'etait ingénieur expert au laboratoire de recherche en realité virtuel Inria.
+    Ma mission principale etait de faire des opérations booleenes sur des polyèdres.
+    Il y avait beaucoup de théorie et l'objectif du monde de la resuère est bien plus dans la publication d'un article que dans la creation d'un objet fini.
+    J'ai donc créé mon entreprise, et là je crée un projet du début à la fin.
+
+    \question{Quels sont les compétences que tu utilises au quotidien au poste que tu occupes ?}
+
+    Je développe, ce que l'on apelle le Creative coding.
+    Je fait aussi de la scenographie et de la direction technique.
+    Mais aussi et bien sur du management et la direction de l'entrperise.
+
+    \question{Utilises-tu des outils particulier dans le cadre de ton travail ?}
+
+    J'utilise les mails pour la communication avec les clients et Slack pour la communication en interne.
+    Pour les projets on utilise BitBucket pour stocker le code et Trello pour suivre les projets
+
+    \question{Comment se découpe ta semaine ?}
+
+    La reflexion sur les projets et leur conception prend environ 20\% de ma semaine.
+    J'y passe 10\% a faire des réunions.
+    Environ 10\% pour le déplacement vers les clients parisiens.
+    20\% de mon temps est dédié au management et à la gestion des équipes et 10\% pour les tâches administratives de la société.
+    Et enfin 20\% pour le chiffrage et la production de devis pour les clients.
+
+    \question{Comment se passe la creation et la gestion d'une entreprise ?}
+
+    Le fait d'être à son compte permet de choisir ses projets.
+    Cela permet aussi de s'interesser à des projets plus R\&D sur le temps de travail quand les projets en cours le permettent.
+    Ces projets R\&D permetterons alors, d'améliorer les projets clients.
+
+    Mais si le fait d'avoir une entreprise est interessant, c'est aussi un poid financier et moral.
+    Il faut donc trouver des projets qui, même s'ils ne sont pas très originaus et ineterssants, permetterons de faire tourner la boite et d'avoir den entrée d'argent.
+
+    La creation d'oeuvres interactives pour les événements comme la fête des lumières cela ne rapporte pas énormément.
+
+    \section{Fiches métier}
+
+    %TODO Introduction
+
+    \begin{metier}{Ingénieur IA}
+        \mproperty{Secteur d'activité}{Traitement de l'image, Intelligence artificielle, Armement}
+        \mproperty{Salaire}{entre 1300 et 2700 \euro\ net par mois}
+        \mproperty{Profil requis}{Tenace, tres bonne conaissances techniques, rigoureux et à l'écoute des autres idées}
+        \mproperty{Compétences}{Informatique, Analyse}
+        \mproperty{Interet du poste}{Un domaine encore vaste et des projets tous uniques}
+        \mproperty{Difficultés du poste}{Des connaissances très pointus sont nécéssaire et une bonne motivation}
+        \mproperty{Définition}{L'objectif de l'ingénieur IA est de concevoir des programmes qui régissent comme des être humains.
+        L'ingénieur IA doit comprendre et reproduir le fonctionnement du cerveau humain pour pouvoir créer des applications qui reagissent le plus possible comme des êtres humains.
+        Le domaine de l'ingénieur IA se rapproche beaucoup de la recherche et demande de grandes connaissances en informatique notemment.}
+        \mproperty{Annonces}{\url{https://goo.gl/wDCb9o} \url{https://goo.gl/RyVvFd} \url{https://goo.gl/LoVdkE}}
+        \mproperty{Sources}{\url{https://goo.gl/Pp75rT}}
+    \end{metier}
+
+    \bigskip
+
+    \begin{metier}{Ingénieur Rendu}
+        \mproperty{Secteur d'activité}{Jeu vidéo, Représentation numérique}
+        \mproperty{Salaire}{Non Communiqué}
+        \mproperty{Profil requis}{...}
+        \mproperty{Compétences}{...}
+        \mproperty{Interet du poste}{...}
+        \mproperty{Difficultés du poste}{...}
+        \mproperty{Définition}{L'ingénieur de rendu est en charge du développement des outils permettant de produire le rendu d'un monde en 3D sur une image en 2D dimentions.
+        L'ingénieur de rendu doit utiliser ses connaissances en mathématiques et en programmation pour développer ces outils pour un rendu en temps reel ou non.
+        Il doit avoir de fortes conaissances des systèmes de rendu comme le GPU et les shaders.}
+        \mproperty{Annonces}{\url{https://goo.gl/tMsePF}}
+    \end{metier}
+
+    \bigskip
+
+    \begin{metier}{Ingénieur Cloud}
+        \mproperty{Secteur d'activité}{0 \euro\ par mois}
+        \mproperty{Salaire}{...}
+        \mproperty{Profil requis}{...}
+        \mproperty{Compétences}{...}
+        \mproperty{Interet du poste}{...}
+        \mproperty{Difficultés du poste}{...}
+        \mproperty{Définition}{...}
+    \end{metier}
+
+    \bigskip
+
+    \begin{metier}{Autre métier}
+        \mproperty{Secteur d'activité}{0 \euro\ par mois}
+        \mproperty{Salaire}{...}
+        \mproperty{Profil requis}{...}
+        \mproperty{Compétences}{...}
+        \mproperty{Interet du poste}{...}
+        \mproperty{Difficultés du poste}{...}
+        \mproperty{Définition}{...}
+    \end{metier}
 
 \end{document}

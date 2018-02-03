@@ -29,7 +29,7 @@ Directeur général
 
 4 ans
 
-**Qu'as tu fait avant d'arriver a ce poste ? Dans quel entreprise as** tu travaillé ? A quel poste ?
+**Qu'as tu fait avant d'arriver a ce poste ? Dans quel entreprise as tu travaillé ? A quel poste ?**
 
 Ingénieurs expert dans un laboratoire de recherche en réalité virtuelle l'inria.
 Beaucoup de théorie pour faire des opération boolennes sur des polyedres.

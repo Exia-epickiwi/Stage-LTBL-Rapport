@@ -14,7 +14,8 @@ total : 600, service : 20
 
 **Dans quel secteur d'activité évolue ton service et ton entreprise ?**
 
-service : R&D équipement de transmission optique sous-marine, entreprise : Réseau de transport optique sous-marin clé en main (conception et fabrication de bout en bout de la solution)
+service : R&D équipement de transmission optique sous-marine  
+entreprise : Réseau de transport optique sous-marin clé en main (conception et fabrication de bout en bout de la solution)
 
 **Quel fonction occupes tu dans cette entreprise ?**
 
