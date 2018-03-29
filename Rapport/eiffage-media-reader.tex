@@ -38,8 +38,8 @@ Ce navigateur de fichiers est affichés sur un ecran de 84 pouces tactile mettan
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.215]{img/media-reader-pres-1.jpg}
-    \includegraphics[scale=0.19]{img/media-reader-pres-2.jpg}
+    \includegraphics[scale=0.45]{img/media-reader-pres-1.jpg}
+    \includegraphics[scale=0.45]{img/media-reader-pres-2.jpg}
     \caption{Un aperçu de l'explorateur de fichiers une fois installé dans la salle cockpit}
 \end{figure}
 
@@ -107,9 +107,7 @@ Chaque component est séparé des autres et peux fonctionner seul sans nécéssi
     \caption{Vue de l'ecran de vérouillage du lecteur de medias}
 \end{figure}
 
-\clearpage
-
-\subsection{Component d'animation}
+\subsubsection{Component d'animation}
 
 Les animation prennnent un grande place dans le design des applications de LTBL et celles-ci sont prises très au serieux par l'équipe de développement.
 Les animations dans les technologies Web posent quand même un problème.
@@ -162,3 +160,64 @@ Enfin, le component \texttt{Animated Block} dispose d'une fonction statique \tex
 
 Ainsi, grâce a ce système, on peux simplement ajouter des animations au projet sans ajouter beaucoup de lignes de code pouvant mener à des bugs.
 Il suffit d'appeler la fonction d'annimation et d'attendre la résolution de la promesse pour éfféstuer des actions apres l'animation.
+
+\subsubsection{Submodules Git \& Integration}
+
+Sur les 3 projet que nous avions a développer pour Eiffage, les 3 avaient besoin d'un explorateur de fichier.
+Que ce soit pour afficher des aperçus comme le projet actuel ou ouvrir un plan sur la table interactive.
+L'explorateur de fichiers est un élément essentiel de l'interface.
+
+Et c'est ici que l'on vois l'interet d'utiliser des Webcomponents.
+En effet, il suffit d'utiliser exactement le même code que j'ai utilisé pour le lecteur de médias dans tout les autres projets.
+
+Un autre problème se pose alors.
+Il serait contre productif de faire une compie du code sur chacun des projets et il serait plus interessant d'utiliser un système de mise à jour automatique.
+Cela peut être assuré par les submodules Git.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{img/submodules.pdf}
+    \caption{Exemple d'utilisation des submodules Git}
+\end{figure}
+
+Pour tout les projets chez LTBL j'ai utilisé git et BitBucket pour la gestion du code source.
+Git dispose d'une fonctionnalité de Submodule.
+Cela consiste en un sous-repository dans le projet actuel.
+Ce sous-reprository fait référence à un repository en ligne commun à tout les projets.
+
+Ainsi, on peut editer le code du component partagé sur le repository qui lui est dédié puis, sur les projet en ayant besoin, récupèrer les modifications avec \texttt{git pull}.
+
+\subsection{Difficultés \& Ergonomie}
+
+Ce projet m'a amené à travailler sur une interface tactile qui allait être utilisée au quotidien et je devait porter une attention tout particulière à l'ergonomie de l'interface.
+
+J'ai alors eu de nombreuses heures d'expérimentations sur les gestes que peuvent avoir les utilisateurs sur les lecteurs comme celui des PDF .
+J'ai aissi pu me rendre compte de la difficulté d'avoir une reaction ergnomique aux gestes tactiles comme ceux du pincement ou de la rotation à deux doigts.
+
+J'ai donc éfféctué beaucoup d'experiences avec de nombreux changement de paramètres pour trouver les bonnes valuers.
+Malheureusement, beacoup de fonctionnalités gestuelles n'ont pas été retenues car elles n'apportaine qu'une frustration supplémentaire pour l'utilisateur.
+
+Dans un second temps je me suis aussi heurté au problème des PDF d'eiffage.
+Les plans sont dance ce format et son t générés automatiquement par le logiciel d'architecture.
+Il en result des Document de tres grosse taille et complexe à afficher, ainsi chaque rendu pouvait prendre pres de 30 secondes.
+Un temps que l'on doit réduire le plus possible pour éviter une attente de la part de l'utilisateur.
+Pour réduir ce temps j'ai mis en place un système qui analyse le zoom éfféctué et qui ne lance un rendu qu'en cas de zoom important.
+Malgré le gain de temps que cela apportais, il fallait trouver une astuce pour éviter les rendu du PDF bien trop lourd.
+J'ai alors décidé d'actualiser le zoom du PDF lors du redimentionnement de la fenêtre d'aperçu pour toujours avoir un zoom optimal et réduire le reccours au zoom manuel.
+
+\subsection{Installation}
+
+Nous avons installé ce projet sur le site de Laborde pres de la garde Saint Lazare à Paris.
+Nous avons installé l'ecran de 84 Pouces sur son pied et avons installé l'application sur l'ordinateur de manière globale sur la machine.
+
+Un problème s'est posé quand nous avons pris connaissance des prérequis de sécurité en vogue chez Eiffage.
+En effet Eiffage utilise le système Active Directory et le département Informatique de l'entrperise ne permet pas la creation d'un compte spécifique pour l'éxécution de l'application.
+Il fallait donc faire en sorte que l'application puisse s'éxécuer sur n'importe quel utilisateur se connectant.
+J'ia alors simplement ajouté un raccourcis vers l'application dans le dossier \texttt{Démarrage} du menu démaré global de l'ordinateur pour que l'application se démarre a chaque ouverture de session.
+J'ai aussi ajouté un bouton de déconnexion permettant de se deconnecter de la session sans passer par le menu démarrer.
+
+\subsection{Conclusion}
+
+Ce projet fut interessant car il m'a permis, au travers d'un sujet simple, de poursuivre ma découverte des webcomponents et des interfaces tactiles.
+J'ai rencontré des obstracles interessant qui m'on fait prendre conscience de la difficulté de créer des interfaces tactiles de qualité.
+Malgré ces problèmes, j'ai réussi à livrer une application fonctionnel et de qualité dont les composants peuvent aisément être intégrés dans les 2 autres projets d'Eiffage
