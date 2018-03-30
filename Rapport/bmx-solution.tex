@@ -53,6 +53,17 @@ Le code précédent étant totalement fait main, il est peu flexible et sensible
 De plus les données sont directement integrés dans le code et il serait chronophage et peu rentable de modifier cette application pour qu'elle d'adapte aux nouveaux besoins.
 J'ai donc décide de reprendre l'application depuis le début et de choisir une solution technique qui me semble plus adaptée à une interface.
 
+Pour ce projet, j'ai utilisé \emph{Electron} qui permet de créer des interfaces facilement à l'aide des technologies Web.
+Je m'y penche plus en détails dans la partie suivante.
+
+Pour le stockage des données, j'ai opté pour une base de données \emph{SQLite} permettant un stockage dans un fichier sans serveur superflu.
+En effet, SQLite est une librairie C mettant à disposition un langage SQL et un stockage de données dans un fichier.
+Cette technique est très intéressante dans notre cas, car les données ne seront qu'utilisées par l'application.
+De plus, l'application ne nécessite pas de grandes performances et donc pas d'optimisation particulière que peuvent présenter les serveurs SGBDR\footnote{Système de Gestion de Bases de Données relationnelles} comme MariaDB ou PostgreSQL\@.
+
+Enfin, pour gérer ces données j'utilise \emph{Sequelize}, un ORM JavaScript permettant de communiquer avec la base de données.
+Cette librairie permet de représenter les données sous forme d'objets JavaScript pour éviter d'écrire les requêtes à la main et ainsi avoir une meilleure intégration des données dans l'environnement JavaScript.
+
 \subsubsection{Electron}
 
 Pour développer l'application j'ai décidé d'utiliser Electron.
@@ -111,3 +122,39 @@ Mais aussi l'utilisation d'évennements Javascript comme vecteur de signal pour 
 Dans ce projet, j'ai été amené à découvrir cette nouvelle norme du W3C par le biais des employés de l'entreprise qui utilisaient dàja cette technologie.
 J'ai découvert les webcomponents et ai expériment avec ceux ci durant ce projet.
 J'ai eu l'occasion, par le suite, d'affiner mes connaissances sur le sujet dans le cadre des 4 autres projets qui les utilisaient.
+
+\subsection{Structure}
+
+Pour cette structure, j'ai puisé dans mes connaissances acquises durant ma formation pour concevoir un système en 3 blocs.
+
+\paragraph{Modèle} Le bloc de modèle définissant les données à stocker dans une base de données relationnelle standard.
+Pour ce faire, j'utilise la librairie d'ORM \emph{Sequelize} ayant pour avantage d'être compatible avec la majeure partie des bases de données relationnelles actuelles.
+Dans cet ORM, on doit définir un modèle, ce modèle sera utilisé pour créer les tables de la base de données.
+Le modèle est donc défini dans un unique fichier \texttt{model.js} permettant de centraliser leurs déclarations.
+
+\paragraph{Backoffice} Le back-office est un serveur web exécuté au sein de l'application Electron.
+Ce serveur web se base sur le modèle pour créer les formulaires de saisie des données.
+Le back-office ne présente aucun code spécifique au modèle de biomérieux, mais met en place une arborescence de formulaires générés en fonction du modèle défini par le développeur.
+Cette technique permet de réutiliser ce back-office dans un tout autre contexte.
+En effet, il suffit de changer le modèle pour que les formulaires de saisie changent dans le back-office.
+
+\paragraph{Affichage client} L'affichage client représente tout ce qui va être affiché par l'application Electron sur le terminal.
+Cet affichage est le seul qui sera vu par les visiteurs du showroom.
+Dans l'architecture utilisée, c'est la seule partie spécifique.
+Dans cette partie, on utilise les WebComponents pour concevoir l'application.
+
+Parmi ces WebComponents, j'en ai créé des génériques permettant d'effectuer des tâches de base.
+Ces WebComponents génériques sont donc :
+\begin{itemize}
+    \item \texttt{<data-element>} permettant de faire une requête dans la base de données s'actualisant à chaque changement
+    \item \texttt{<page-router>} permettant d'afficher ou non une page en fonction de l'URL associée
+    \item \texttt{<animation-block>} permettant d'animer des éléments de l'interface en utilisant les transitions CSS
+\end{itemize}
+
+\begin{landscape}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.9]{Proposition-utopia.pdf}
+        \caption{Structure générale de l'application Biomérieux}
+    \end{figure}
+\end{landscape}
