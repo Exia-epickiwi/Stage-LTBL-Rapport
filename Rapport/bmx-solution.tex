@@ -14,18 +14,18 @@ BioMérieux dispose d'un showroom permettant de montrer leur produits à leurs f
 
 Dans ce Showroom, un ensemble de dispositifs interactifs sont mis en place pour presenter les produits et l'entreprise.
 Parmis ces équipements, on retrouve l'espace solution.
-Cet espace présente un exemplaire physique des principales machines concus par bioMérieux.
+Cet espace présente un exemplaire physique des principales machines concus par BioMérieux.
 Un projecteur permet alors d'afficher une image sur une vitre opacifiante.
 L'image projetée est l'écran d'un Mac Mini disposé dans la salle technique du Showroom;
-On utilise un lidar\footnote{Le lidar est un laser rotatif permettant, par balayage, de detecter la position d'un element dans l'espace} pour reperer l'emplacement du doigt sur la vitre et ainsi controler l'ordinateur.
+On utilise un lidar\footnote{Le lidar est un laser rotatif permettant, par balayage, de detecter la position d'un element dans l'espace.} pour reperer l'emplacement du doigt sur la vitre et ainsi controler l'ordinateur.
 
-L'application présente avant ma mission etait développée en C++ avec OpenFrameworks.
+L'application présente avant ma mission etait développée en C++ avec OpenFrameworks\footnote{OpenFrameworks est un framework se basant sur de nombreuses librairies permettant la creation simplifiée d'applications graphiquement poussées. Il est très utilisé dans le domaine de la scenographie et du creative coding.}.
 Cette application présente un arbre de composents graphiques chacun affichant un élément de l'interface.
-Ce système, bien que fonctionnel, est assez peux flexible au regard des nouvelles fonctionnalités demandés par bioMérieux.
+Ce système, bien que fonctionnel, est assez peux flexible au regard des nouvelles fonctionnalités demandés par BioMérieux.
 
-En effet, bioMérieux à recemment changé son logo et sa charte graphique pour un aspect plus épuré et flat-design\footnote{Le flat-design est un courant de design moderne qui possède une approche minimaliste de l'interface en se basant sur des aplats de couleurs unis et des effets d'ombres}.
+En effet, bioMérieux à recemment changé son logo et sa charte graphique pour un aspect plus épuré et flat-design\footnote{Le flat-design est un courant de design moderne qui possède une approche minimaliste de l'interface en se basant sur des aplats de couleurs unis et des effets d'ombres.}.
 Pour reflèter ce changement dans leur showroom, l'entreprise a demandé un redesign de l'application.
-De plus, pour pouvoir gèrer par eux même les produits presents dans l'application, bioMérieux a demandé la mise en place d'un backoffice qui permettra d'éditer le contenu de l'application sans faire appel à LTBL.
+De plus, pour pouvoir gèrer par eux même les produits presents dans l'application, bioMérieux a demandé la mise en place d'un backoffice qui permettra d'éditer le contenu de l'application sans faire appel à LTBL .
 
 \begin{figure}[h]
     \centering
@@ -49,8 +49,8 @@ Pour résumer, les fonctionnalités demandés sont :
 
 \subsection{Conception de la solution}
 
-Le code précédent etant totalement fait main, il est peu flexible et sensible aux bugs de développement.
-De plus les données sont dirèctement intègrés dans le code et il serait chronophage et peu rentable de modifier cette application pour qu'elle d'adapte aux nouveaux besoins.
+Le code précédent étant totalement fait main, il est peu flexible et sensible aux bugs de développement.
+De plus les données sont directement integrés dans le code et il serait chronophage et peu rentable de modifier cette application pour qu'elle d'adapte aux nouveaux besoins.
 J'ai donc décide de reprendre l'application depuis le début et de choisir une solution technique qui me semble plus adaptée à une interface.
 
 \subsubsection{Electron}
@@ -59,11 +59,55 @@ Pour développer l'application j'ai décidé d'utiliser Electron.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.5]{img/electron.png}
+    \includegraphics[scale=0.2]{img/electron.png}
     \caption{Logo de Electron}
 \end{figure}
 
-Electron est un framework permettant de concevoir des application natives en utilisant les technologies web.
-Electron embarque le moteur de rendu et le moteur Javascript de chromium mais ajoute les fonctionalités de NodeJS permettant d'interagir avec le système hote.
+Electron est un framework permttant de concevoir des application natives en utilisant les technologies web.
+Electron embarque le moteur de rendu et le moteur Javascript de Chromium mais ajoute les fonctionalités de NodeJS permettant d'interagir avec le système hote.
+Chromium est l'un des navigateurs les plus avencés dans l'integration des nouvelles normes et cela permet de profiter de nouvelles fonctionnalités très interessantes comme les Webcomponents et WebGL .
+Enfin, on peut toujours accèder au système de fichiers de l'utilisateur et faire de la dépendances de modules NodeJS avec les fonctionnalités que propose Electron en plus des fonctionnalités de base que l'on retrouve sur un site web classique.
 
 L'utilisation de ce framework est interessante dans le cas de cette application car elle permet de concevoir des interfaces simplement.
+De plus, les langages web sont spécifiquement dédiés a la creation d'interfaces comme demandé.
+Ainsi, on peut etimer que recoder l'application avec un nouveau design et le nouvelles fonctionnalités prendrais moins de temps que d'adapter l'ancienne application.
+
+\subsection{WebComponents}
+
+Le système de Webcomponents est un ensemble de nouvelles normes mises en place il y a peu de temps par le W3C et implémentés dans Chromium permettant de créer de nouveaux tags HTML avec des fonctionnalités spécifiques et isolés du reste de l'archithecture de la page.
+
+Un Webcomponent est basé sur 4 normes :
+
+\paragraph{Custom Elements} Une fonctionnalité permettant de créer un tag HTML personnalisé et reconnu par le navigateur comme faisant référence au code fournis.
+
+\paragraph{HTML Template} Le tag \texttt{<template>} permet de créer un élément qui ne sera pas visible par l'utilisateur mais qui servira de squelette pour la creation de futurs éléments.
+Dans les Webcomponents, on les utilisent pour créer le squelette de base de notre components.
+
+\paragraph{Shadow DOM} Un concept permettant d'isoler une partie de l'arborescense d'une page Web.
+Cela impliqe l'isolation du style et des éléments et cette technologie sert à créer le contenu caché de notre futur élément qui apparaitra comme une blackbox.
+
+\paragraph{HTML Import} Permet d'importer un fichier HTML sans devoir inclure le HTML dans le document chargé au départ.
+Cela permet notemment d'inclure tout le code HTML, CSS et JS d'un component dans un même fichier HTML.
+Il suffira ensuite d'importer cet unique fichier HTML pour pouvoir utiliser le component.
+
+\bigskip
+
+Le développement en Webcomponent présente de nombreux avantages.
+L'isolation du style CSS dans le Shadow DOM permet de ne pas provoquer de conflit CSS lors d'une séléction un peu trop générale sur le fichier de styles de base.
+L'isolation du javascript permet de se concentrer uniquement sur le composant sans interferer avec le reste de l'application.
+Enfin, l'approche unitaire des Webcomponents permet une réusablitié importante.
+
+Mais l'approche par component pose aussi des difficultés.
+En effet, il faut penser le composent en tant qu'élément générique.
+Si on fait un composent trop spécifique ou dépendant de ses voisins, il sera difficile de réutiliser le composant dans un autre contexte de celui pour lequel il etait prévu au début.
+Cela implique de réfléchir à la structure de l'application en amont et de changer la conception que l'on se fait d'une application.
+Il ne faut plus penser l'application dans son ensemble mais comme une ensemble de blocs réutilisables ajoutés les uns aux autres.
+
+Faire un bloc réutilisable passe par l'utilisation des attributs HTML comme vecteurs de transmission d'informations.
+Mais aussi l'utilisation d'évennements Javascript comme vecteur de signal pour avertir les parents.
+
+\bigskip
+
+Dans ce projet, j'ai été amené à découvrir cette nouvelle norme du W3C par le biais des employés de l'entreprise qui utilisaient dàja cette technologie.
+J'ai découvert les webcomponents et ai expériment avec ceux ci durant ce projet.
+J'ai eu l'occasion, par le suite, d'affiner mes connaissances sur le sujet dans le cadre des 4 autres projets qui les utilisaient.
