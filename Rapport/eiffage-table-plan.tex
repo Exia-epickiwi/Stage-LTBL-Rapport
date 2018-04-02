@@ -1,0 +1,47 @@
+\section{Eiffage table plan}
+\label{eiffageTablePlan}
+
+//TODO un Screenshot de l'application
+
+Dans le trio d'applications de la nouvelle salle cokpit d'Eiffage, l'application d'édition de plan m'a été accordée en partie.
+L'objectif de cette application est d'afficher et de permettre la manipulation de plans (au format PDF) issus de  l'espace réseau d'Eiffage.
+Cette application est affichée sur un ecran intègré dans une table faite sur mesures permettant l'interaction de plusieurs personnes au même moment.
+
+Le cahier des charge de cette application est le suivant :
+\begin{itemize}
+    \item Charger et afficher des plans depuis le réseau d'Eiffage
+    \item Permettre aux utilisateurs de manipuler les plans affichés
+    \item Permettre aux utilisateurs d'annoter les plans affichés et d'enregistrer ces annotations pour les transmettre à l'archithecte
+    \item Utiliser un design compatible avec l'affichage sur une table tactile ou plusieurs personnes sont assises autour d'un écran affichant l'application.
+\end{itemize}
+
+\subsection{Application existante}
+\label{eiffageTablePlanApplicationExistante}
+
+Cette application était la plus avencée des trois lors du début du projet.
+L'équipe précédente avait beaucoup travaillé sur l'affichage des PDF.
+
+En effet, les PDF de Eiffage sont très lourds et demandent un affichage particulier.
+L'équipe ayant travaillé sur ce projet a donc beaucoup réfléchis à la technologie à utiliser pour afficher les PDF sans ralentissements.
+Ils ont donc opté pour une apploche orientée Web avec un chargement, non pas du PDF en lui même, mais d'une image de ce PDF rendue a l'aide de ImageMagick.
+Ils ont alors utilisé PixiJs, une librairie 2D pour WebGL, pour afficher l'image du PDF et permettre l'annotation.
+
+Le plus gros de l'application, l'edition de plan, etait déjà codée et j'ai donc eu l'objectif de créer l'interface pour qu'elle reflète les creations du designer.
+Mais aussi que l'application soit utilisable en collaboration et donc autour d'une table.
+
+En revanche, l'ancienne application n'utilisait pas les WebComponents et j'ai du m'adapter pour reformer le code présent.
+De plus, le développeur me précédent, n'avait pas dutout les même habitudes de développement et la même structure que moi et j'ai donc eu une longue phase d'analyse pour comprendre le rôle de chaque élément.
+
+\subsection{Technologie}
+\label{eiffageTablePlanTechnologie}
+
+Les technologies utilisés dans le cadre de ce projet sont les même que les autres applications de ce type crées par LTBL.
+On y retrouve Electron pour l'affichage de l'application et les Webcomponents pour la structcure interne.
+
+\subsection{Structure}
+\label{eiffageTablePlanStructure}
+
+L'application se divise alors en de multiples WebComponents chacun ayant un rôle spécifique.
+Dans ce projet j'ai éxpérimenté sur l'utilisation de Stores permettant le stockage des données de l'application pour une sychronisation des différents éléments.
+
+//TODO Explication des différents Webcomponents de l'application et leur rôles
