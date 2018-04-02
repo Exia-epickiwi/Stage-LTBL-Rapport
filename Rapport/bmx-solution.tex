@@ -74,16 +74,17 @@ Pour développer l'application j'ai décidé d'utiliser Electron.
     \caption{Logo de Electron}
 \end{figure}
 
-Electron est un framework permttant de concevoir des application natives en utilisant les technologies web.
+Electron est un framework permettant de concevoir des application natives en utilisant les technologies web.
 Electron embarque le moteur de rendu et le moteur Javascript de Chromium mais ajoute les fonctionalités de NodeJS permettant d'interagir avec le système hote.
-Chromium est l'un des navigateurs les plus avencés dans l'integration des nouvelles normes et cela permet de profiter de nouvelles fonctionnalités très interessantes comme les Webcomponents et WebGL .
+Chromium est l'un des navigateurs les plus avancés dans l'integration des nouvelles normes et cela permet de profiter de nouvelles fonctionnalités très intéressantes comme les Webcomponents et WebGL .
 Enfin, on peut toujours accèder au système de fichiers de l'utilisateur et faire de la dépendances de modules NodeJS avec les fonctionnalités que propose Electron en plus des fonctionnalités de base que l'on retrouve sur un site web classique.
 
-L'utilisation de ce framework est interessante dans le cas de cette application car elle permet de concevoir des interfaces simplement.
-De plus, les langages web sont spécifiquement dédiés a la creation d'interfaces comme demandé.
-Ainsi, on peut etimer que recoder l'application avec un nouveau design et le nouvelles fonctionnalités prendrais moins de temps que d'adapter l'ancienne application.
+L'utilisation de ce framework est intéressant dans le cas de cette application car elle permet de concevoir des interfaces simplement.
+Les langages web sont spécifiquement dédiés à la creation d'interfaces comme le demande notre projet.
+Ainsi, on peut estimer que recoder l'application avec un nouveau design et le nouvelles fonctionnalités prendrais moins de temps que d'adapter l'ancienne application.
 
-\subsection{WebComponents}
+\subsubsection{WebComponents}
+\label{webcomponents}
 
 Le système de Webcomponents est un ensemble de nouvelles normes mises en place il y a peu de temps par le W3C et implémentés dans Chromium permettant de créer de nouveaux tags HTML avec des fonctionnalités spécifiques et isolés du reste de l'archithecture de la page.
 
@@ -127,33 +128,134 @@ J'ai eu l'occasion, par le suite, d'affiner mes connaissances sur le sujet dans 
 
 Pour cette structure, j'ai puisé dans mes connaissances acquises durant ma formation pour concevoir un système en 3 blocs.
 
-\paragraph{Modèle} Le bloc de modèle définissant les données à stocker dans une base de données relationnelle standard.
-Pour ce faire, j'utilise la librairie d'ORM \emph{Sequelize} ayant pour avantage d'être compatible avec la majeure partie des bases de données relationnelles actuelles.
-Dans cet ORM, on doit définir un modèle, ce modèle sera utilisé pour créer les tables de la base de données.
-Le modèle est donc défini dans un unique fichier \texttt{model.js} permettant de centraliser leurs déclarations.
-
-\paragraph{Backoffice} Le back-office est un serveur web exécuté au sein de l'application Electron.
-Ce serveur web se base sur le modèle pour créer les formulaires de saisie des données.
-Le back-office ne présente aucun code spécifique au modèle de biomérieux, mais met en place une arborescence de formulaires générés en fonction du modèle défini par le développeur.
-Cette technique permet de réutiliser ce back-office dans un tout autre contexte.
-En effet, il suffit de changer le modèle pour que les formulaires de saisie changent dans le back-office.
-
-\paragraph{Affichage client} L'affichage client représente tout ce qui va être affiché par l'application Electron sur le terminal.
-Cet affichage est le seul qui sera vu par les visiteurs du showroom.
-Dans l'architecture utilisée, c'est la seule partie spécifique.
-Dans cette partie, on utilise les WebComponents pour concevoir l'application.
-
-Parmi ces WebComponents, j'en ai créé des génériques permettant d'effectuer des tâches de base.
-Ces WebComponents génériques sont donc :
-\begin{itemize}
-    \item \texttt{<data-element>} permettant de faire une requête dans la base de données s'actualisant à chaque changement
-    \item \texttt{<page-router>} permettant d'afficher ou non une page en fonction de l'URL associée
-    \item \texttt{<animation-block>} permettant d'animer des éléments de l'interface en utilisant les transitions CSS
-\end{itemize}
-
-
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.6]{img/Proposition-utopia.pdf}
     \caption{Structure générale de l'application Biomérieux}
 \end{figure}
+
+\subsubsection{Modèle}
+
+Le modèle est la partie de l'application qui définis l'organisation et le stockage des données requis par les éléments de l'application.
+
+Pour définir et stocker les donnée j'utilise la librairie d'ORM\footnote{Un ORM est une librairie apportant une couche d'abstraction aux reqètes SQL par l'utilisation des fonctionnalités Orientée Objet du langage dans laquelle elle est implémentée (Ex : Doctrine en PHP, Sequelize en JavaScript, Django ORM en Python, etc.)} \emph{Sequelize}.
+Elle a pour aventage d'être compatible avec la majeure partie des bases de données relationnelles les plus connues comme MySql, PostgreSQl, SQLite, etc.
+Dans cet ORM, on doit définir un modèle, ce modèle sera utilisé pour créer les tables de la base de données.
+J'ai décidé de définir ce modèle dans un unique fichier \texttt{model.js} permettant de centraliser leurs déclarations pour facilement les adapter en cas de changement d'avis du client.
+
+L'objectif de cette structure est d'être le plus flexible possible pour pouvoir reprendre le même code dans un tout autre système.
+
+\bigskip
+
+Dans le cas de cette application pour BioMérieux, j'ai décider de découper les données en 5 entités.
+Ces entités représentent une table dans la base de données et permettent de faire le lien entre cette table et le code de l'applicaiton.
+Pour construire ce modèle de données, je me suis basé sur les designs de l'application faits par le graphiste et des informations données par mon maitre de stage.
+L'une des difficultés ici fut de ne pas avoir de cahier des charges défini, ce que m'a obligé à reprendre mon modèle plusieurs fois.
+Mais la grande flexibilité du système m'as permis de continuer à développer sans me soucier de ces changements.
+
+\bigskip
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.6]{img/uml-bmx-solution.png}
+    \caption{Le diagramme UML du modèle de données de l'application BioMérieux Solution}
+\end{figure}
+
+\clearpage
+
+J'ai donc mis en place les entités suivantes
+
+\paragraph{Produit} L'entités représentant un produit de Biomérieux.
+Il contiens un \emph{nom}, une \emph{description} en texte riche\footnote{Un texte riche est un ou plusieurs paragraphes formatés suivant une certaine syntaxe; On peut donc y ajouter des passages en gras, italique, insèrer des images et des listes}, une \emph{image} uplodée, d'un \emph{identifiant de lampe} permettant d'envoyer des commandes OSC\footnote{Le protocol OSC (Open Sound Control) permet d'envoyer des commandes dans des paquets UDP au travers du réseau; Il est três utilisé dans la scenographie pour faire communiquer les différents éléments de l'espace comme des lampes, des moteurs, etc.} et d'une image de présentation.
+
+\paragraph{Technology} Une technologie de produit, permettant de classifier les produits.
+Un même produit est associé à une seul technologie.
+Une technologie ne contien qu'un \emph{nom}.
+
+\paragraph{Thematic} Une thématique permet de regrouper les produits en diverses catégories.
+Il est ainsi possible d'ajouter un même produit à plusieurs thématiques.
+Une thématique permet de classifier les produits dans divers domaine d'expertise.
+Une thémétique possède un \emph{nom} et une \emph{tagline} représentant le slogan de cette thématique.
+Chaque thématique peut contenir plusieurs produit et un même produit peut se retrouver dans plusieurs catégories.
+
+\paragraph{SuperThematic} Une thématique contenant pusieurs sous-thématiques.
+J'ai choisi de créer une super thématique au lieu de faire une arboréscense de thématique car le client ne dit pas vouloir une arborécense plus grande que 2 niveaux.
+Mais aussi qu'il ne faut pas pouvoir ajouter des produits dans les super thématiques.
+Une super thématique ne contien qu'un \emph{nom} tout comme les thématiques mais peut contenir plusieurs thématiques.
+
+\paragraph{GalleryImage} Chaque produit dispose de plusieurs images disposé dans une gallerie consultable par l'utilisateur.
+Cette entitée permet alors de créer une image de cette gallerie.
+Une produit peut contenir plusieurs images et chaque image dispose d'un \emph{chemin} vers l'image uploadée et d'une \emph{position} dans la gallerie représentée par un nombre.
+Les images sont alors triées dans l'ordre de ce champ.
+
+\subsubsection{BackOffice}
+
+Un BackOffice est une interface simplifiée permettant au client final d'éditer le contenu de l'application sans l'intervention des créateurs.
+Cela peut passer par un logiciel compagnon ou une interface Web.
+Dans mon cas, j'ai choisi la deuxième option pour éviter de demander le développement et et l'installation d'une deuxième, application.
+
+Le BackOffice est un serveur web exécuté au sein de l'application Electron.
+Ce serveur web se base sur le modèle pour créer les formulaires de saisie des données.
+Le back-office ne présente aucun code spécifique au modèle de BioMérieux, mais met en place une arborescence de formulaires générés en fonction du modèle défini par le développeur.
+Cette technique permet de réutiliser ce back-office dans un tout autre contexte mais permet aussi de changer la modèle sans difficulté.
+
+Pour ce backoffice j'ai utilisé \emph{Express} Une librairie permettant de créer des application Web très simplement et le moteur de template \emph{twig} que j'ai déjà utilisé dans le projet Web de l'exia.
+
+\bigskip
+
+Avec le recul de mon stage, je mre rend compte que le développement d'une application compagnon aurait été plus interessante pour éviter qu'un pirate ayant accès au réseau de l'application puisse librement en modifier le contenu.
+De plus, cela aurai permis d'améliorer les performances en évitant de démarre un serveur web à chaque utilisation de l'interface client.
+
+Mais, l'approche que j'ai utilisé permet une plus grande simplicité d'opération par la mise à jour en direct de la vue client et l'absence de fichier à transfèrer.
+
+\subsubsection{Affichage client}
+
+ L'affichage client représente tout ce qui va être affiché par l'application Electron sur le terminal.
+Cet affichage est le seul qui sera vu par les visiteurs du showroom.
+Dans l'architecture utilisée, c'est la seul partie spécifique.
+Dans cette partie, on utilise les WebComponents (\emph{cf} partie \ref{webcomponents}) pour concevoir l'application.
+
+Parmi ces WebComponents, j'en ai créé des génériques permettant d'effectuer des tâches de base.
+
+
+\paragraph{DataElement} Le plus important de ces WebComponents car il permet, en tout point de l'application, de récupèrer des données depuis la base de données et dêtre avertis quand ces données changent.
+Cela permet de récupèrer les données mais aussi d'actualiser la vue en direct dès la modification des données.
+Cela est rendu possible par deux processus :
+\begin{description}
+    \item[Hooks Sequelize] Les entités sequelize diposent de Hooks permettants d'appeler un fonction lors d'action spécifiques comme la creation, la supression ou la mise à jour de l'entitée. J'utilise ces Hooks pour alerter le \texttt{<data-element>} de la modification des données.
+    \item[IPC Electron] Electron, tout comme chromium, est un logiciel multi-processus. Le processus initial se charger de démarrer un processus enfant pour afficher les données. Ce processus initial est aussi en charge de la mise an route du back office. Pour que les modifications soient éfféctués dans tout les processus, j'envoie un signal IPC contenant l'entitée modifiée pour qu'elle soit mise à jour dans tout les processus.
+\end{description}
+
+\paragraph{PageRouter} L'élément \texttt{<page-router>} permet de simuler le fonctionnement d'un système multipage.
+Chaque élément placé dans ce Webcomponent dispose de d'un attribut \texttt{route} définissant l'URL de la page.
+Une route peut contenir n'importe quel carractère mais aussi des attributes en faisant précèder le nom du paramètre par des \texttt{:}.
+On peut alors choisir la page à afficher en entrant l'URL de celle-ci dans l'attribut \texttt{page} du webcomponent \texttt{<page-router>}.
+
+\paragraph{AnimationBlock} Un webcomponent d'animation se basant sur les modules d'animation de AngularJs ou de VueJs.
+Il permet d'animer les éléments de l'interface a la fin de la production de l'application et de manière flexible.
+Il se base sur les transtions CSS pour de grandes performances et ne s'active que lors du focus sur l'application.
+J'en parle plus en details dans la partie \ref{animationblock}.
+
+\subsection{Installation}
+\label{bmxinstallation}
+
+La première installation de l'application s'est déroulée le 7 février dans les locaux de BioMérieux.
+J'ai pu y découvrir le nouveau bâtiment de l'entreprise et son showroom très impressionnant.
+
+Le dispositif est disposé sur une vitre opacifiante et le dispositif de pointage (autrefois un lidar) est remplacé par une caméra infrarouge et un stylo spécifique.
+Ce système permet une précision de pointage plus importante et un système plus discret.
+
+Malheuresement, en raison d'un problème touchant l'ensemble du showroom, je n'ai pas eu l'occasion de tester l'application condition réél.
+Mai j'ai tout de même pus soumettre mon application a l'utilisateur final qui semble interessé par les nouvelles fonctionnalités.
+
+Une nouvelle installation est planifiée pour le 12 Avril pour installer mon application dans le showroom et démarrer les premier tests en conditions réél.
+
+\subsection{conclusion}
+\label{bmxconclusion}
+
+Ce projet fut le premier au sein de l'entreprise LTBL
+J'au eu l'occasion de ma familiariser avec les services, l'équipe de développement et de design et de découvrir les téchnologies utilisés en interne.
+
+Ce projet fut mon premier projet utilisant les WebComponents et il m'a donné envie de creuser dans cette direction tant le sujet est vaster et interessant.
+En revanche, je me rend compte en fin de stage, que j'ai fait des érreurs de structure dans mon découpage.
+Ces érreurs ne peuvent malheuresement pas être corrigées dans le peu de temps qu'il me rêste pour finir mon stage mais me permettent de constater mon avencée dans cette nouvelle technologie.
