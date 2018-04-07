@@ -47,7 +47,6 @@ On y retrouve Electron pour l'affichage de l'application et les Webcomponents po
 \label{eiffageTablePlanStructure}
 
 L'application se divise alors en de multiples WebComponents chacun ayant un rôle spécifique.
-Dans ce projet j'ai éxpérimenté sur l'utilisation de Stores permettant le stockage des données de l'application pour une sychronisation des différents éléments.
 
 \begin{figure}[h]
     \centering
@@ -55,10 +54,25 @@ Dans ce projet j'ai éxpérimenté sur l'utilisation de Stores permettant le sto
     \caption{Structure de l'application Table Plan}
 \end{figure}
 
-\subsubsection{Stores}
-\label{eiffageTablePlanStores}
+On retrouve alors les composants suivants
 
-%TODO parler des stores
+\paragraph{Blueprint player} Un component en charge d'afficher et d'annoter un plan dans notre cas.
+Ce component etait déjà, en grande partie, conçu quand j'ai débuté le développement de l'interface.
+Aisin, je n'ai eu qu'à l'integrer dans l'application finale.
+
+\paragraph{Tab menu} Le menu composé de différents onglets.
+Chaque onglet représente un plan ouvert qui peut être affiché.
+Ce component est présent en 2 exemplaires dont un retourné sur le haut de l'application déstiné aux utilisateur présent de l'autre coté de la table.
+J'ai synchronisé l'etat de ces deux components avec un système de Store (\emph{cf} partie\ref{eiffageTablePlanStores})
+
+\paragraph{Toolbar} Un composant affichant divers boutons permettant de choisir l'outil à utiliser dans sur le plan affiché.
+Ce component est présent en 4 exemplaires dans l'application et doit donc être synchronisé avec ses voisins.
+J'ai aussi utilisé le système de store pour synchroniser les états des barres d'outils et des éditeurs de plans (\texttt{Blueprint Player}).
+
+\bigskip
+
+Dans cette application, j'ai aussi utilisé le component \texttt{Media reader} du projet précédent pour offrire une interface unifiée sur toutes les application développées pour Eiffage.
+Je l'ai ajouté par le biais des submodules Git et de quelques petits ajustements dans le code de base de l'explorateur.
 
 \subsection{Style}
 \label{eiffageTablePlanStyle}
@@ -78,6 +92,40 @@ La raison de cette spécificité est la présence de texte.
 Mettre un effet de mirroir sur un texte le rend completement illisible (contrairement à un icone) et j'ai éfféctué une rotation au lieu de faire un mirroir.
 Mais cela posé d'autres problèmes puisque la droite et la gauche etait inverée sur chacun des éléments.
 J'ai donc modifié le code source du composant de la barre d'onglets pour qu'elle inverse toutes les commandes dans certains cas.
+
+\subsection{Stores}
+\label{eiffageTablePlanStores}
+
+Par son style particulier et la dimention collaborative de la table, de nombreux éléments de l'interface doivent être synchronisés.
+Par exemple, il faut synchroniser l'etat des barres tout'ils pour qu'elles affichent en tout temps le bon outil en cours d'utilisation même si cet outil est changé depuis un élément exterieur comme une autre barre d'outils.
+
+J'ai, dans un premier temps, imaginé un système inclus dans les components permettant de les lier directement pour q'ils s'informent entre eux lors d'un changement d'état d'un coté.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=1]{img/premiere-synchro.pdf}
+    \caption{Premier système de sychronisation utilisé dans le cas des barres d'outils de l'application}
+\end{figure}
+
+Cela fonctionnait, mais je me suit vite heurté à la rigidité de ce système et à la complexité d'étendre les fonctionnalités de ce système à l'application entière.
+J'ai donc puisé dans mes connaissance et me suis inspiré des solutions trouvés dans des librairies comme \emph{Vuex} pour concevoir les Stores.
+
+Un store est une classe Singleton\footnote{Une classe qui ne peut être instanciée qu'une seul fois et accessible par tout le programme}  qui va stocker un état particulier.
+Cette classe est observable et peut donc informer les éléments de l'interface qui lui sont abonnés des changements apportés à l'etat du store.
+Ce système permet de centraliser la gestion des informations à l'echelle de l'application sans pour autant rendre les components dépendants les uns des autres.
+De plus ce système permet un grande flexibilité car on peut modifier l'etat à n'importe quel endroit de l'interface.
+Ces changements seront alors répercutés sur l'ensemble de l'application automatiquement et dynamiquement.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=1.5]{img/store.pdf}
+    \caption{Le fonctionnement du store dans le cadre de la gestion des barres d'outils}
+\end{figure}
+
+J'ai alors réutilisé ce système dans la gestion des plans ouverts et en cours de conversion (\emph{cf} partie \ref{eiffageTablePlanConversion}) sur Tableplan.
+Mais aussi dans les autres applications que j'ai été amené à développer à la suite de celle-ci.
+
+\clearpage
 
 \subsection{Conversion}
 \label{eiffageTablePlanConversion}
@@ -105,4 +153,10 @@ On informa alors l'utilisateur de la conversion en cours et on attend la fin de 
 
 La conversion est effectuée avec ImageMagick, un logiciel de manipulation d'images très performant, et de GhostScript, un logiciel permettant de rendre des fichiers PDF avec ImageMagick.
 
-Pour permettre un rendu optimal dans toutes les circonstances, nous avons choisi de rendre les plans en 4K et de les afficher dans une fenètre 4 fois superieur a leur taille pour avoir une trai d'annotation fin bien défini.
+Pour permettre un rendu optimal dans toutes les circonstances, nous avons choisi de rendre les plans en 4K et de les afficher dans une fenètre 4 fois superieur à leur taille pour avoir un trai d'annotation fin bien défini.
+
+\subsection{Conclusion}
+\label{eiffageTablePlanConclusion}
+
+Ce projet fut pour moi l'occasion d'éxpérimenter plus en profondeur les stockage des données au sein d'une application basée sur des composants.
+Ce fut aussi une bonne experiance de travail en équipe car je n'ai développé que l'interface qui entourait un système d'affichage et d'annotation de plans développé par le rêste de l'equipe.
