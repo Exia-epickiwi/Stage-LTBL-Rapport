@@ -15,8 +15,7 @@ BioMérieux dispose d'un showroom permettant de montrer leur produits à leurs f
 Dans ce Showroom, un ensemble de dispositifs interactifs sont mis en place pour presenter les produits et l'entreprise.
 Parmis ces équipements, on retrouve l'espace solution.
 Cet espace présente un exemplaire physique des principales machines concus par BioMérieux.
-Un projecteur permet alors d'afficher une image sur une vitre opacifiante.
-L'image projetée est l'écran d'un Mac Mini disposé dans la salle technique du Showroom;
+Un projecteur permet alors d'afficher une image sur une vitre opacifiante, cette image projetée est l'écran d'un Mac Mini disposé dans la salle technique du Showroom;
 On utilise un lidar\footnote{Le lidar est un laser rotatif permettant, par balayage, de detecter la position d'un element dans l'espace.} pour reperer l'emplacement du doigt sur la vitre et ainsi controler l'ordinateur.
 
 L'application présente avant ma mission etait développée en C++ avec OpenFrameworks\footnote{OpenFrameworks est un framework se basant sur de nombreuses librairies permettant la creation simplifiée d'applications graphiquement poussées. Il est très utilisé dans le domaine de la scenographie et du creative coding.}.
@@ -50,8 +49,8 @@ Pour résumer, les fonctionnalités demandés sont :
 \subsection{Conception de la solution}
 
 Le code précédent étant totalement fait main, il est peu flexible et sensible aux bugs de développement.
-De plus les données sont directement integrés dans le code et il serait chronophage et peu rentable de modifier cette application pour qu'elle d'adapte aux nouveaux besoins.
-J'ai donc décide de reprendre l'application depuis le début et de choisir une solution technique qui me semble plus adaptée à une interface.
+De plus les données sont directement integrés dans le code et il serait chronophage et peu rentable de modifier cette application pour qu'elle s'adapte aux nouveaux besoins.
+J'ai donc décidé de reprendre l'application depuis le début et de choisir une solution technique qui me semble plus adaptée à une interface.
 
 Pour ce projet, j'ai utilisé \emph{Electron} qui permet de créer des interfaces facilement à l'aide des technologies Web.
 Je m'y penche plus en détails dans la partie suivante.
@@ -75,7 +74,7 @@ Pour développer l'application j'ai décidé d'utiliser Electron.
 \end{figure}
 
 Electron est un framework permettant de concevoir des application natives en utilisant les technologies web.
-Electron embarque le moteur de rendu et le moteur Javascript de Chromium mais ajoute les fonctionalités de NodeJS permettant d'interagir avec le système hote.
+Il embarque le moteur de rendu et le moteur Javascript de Chromium mais ajoute les fonctionalités de NodeJS permettant d'interagir avec le système hote.
 Chromium est l'un des navigateurs les plus avancés dans l'integration des nouvelles normes et cela permet de profiter de nouvelles fonctionnalités très intéressantes comme les Webcomponents et WebGL .
 Enfin, on peut toujours accèder au système de fichiers de l'utilisateur et faire de la dépendances de modules NodeJS avec les fonctionnalités que propose Electron en plus des fonctionnalités de base que l'on retrouve sur un site web classique.
 
@@ -88,19 +87,22 @@ Ainsi, on peut estimer que recoder l'application avec un nouveau design et le no
 
 Le système de Webcomponents est un ensemble de nouvelles normes mises en place il y a peu de temps par le W3C et implémentés dans Chromium permettant de créer de nouveaux tags HTML avec des fonctionnalités spécifiques et isolés du reste de l'archithecture de la page.
 
+\bigskip
+
 Un Webcomponent est basé sur 4 normes :
 
-\paragraph{Custom Elements} Une fonctionnalité permettant de créer un tag HTML personnalisé et reconnu par le navigateur comme faisant référence au code fournis.
+\paragraph{Custom Elements} Une fonctionnalité permettant de créer un tag HTML personnalisé et reconnu par le navigateur comme faisant référence au code associé sous forme de classe.
 
 \paragraph{HTML Template} Le tag \texttt{<template>} permet de créer un élément qui ne sera pas visible par l'utilisateur mais qui servira de squelette pour la creation de futurs éléments.
-Dans les Webcomponents, on les utilisent pour créer le squelette de base de notre components.
+Dans les Webcomponents, on les utilisent pour créer le squelette de base de notre component.
 
 \paragraph{Shadow DOM} Un concept permettant d'isoler une partie de l'arborescense d'une page Web.
-Cela impliqe l'isolation du style et des éléments et cette technologie sert à créer le contenu caché de notre futur élément qui apparaitra comme une blackbox.
+Cela implique l'isolation du style et des éléments.
+Cette technologie sert à créer le contenu caché de notre futur élément qui apparaitra comme une blackbox.
 
-\paragraph{HTML Import} Permet d'importer un fichier HTML sans devoir inclure le HTML dans le document chargé au départ.
+\paragraph{HTML Import} Permet d'importer un fichier HTML externe.
 Cela permet notemment d'inclure tout le code HTML, CSS et JS d'un component dans un même fichier HTML.
-Il suffira ensuite d'importer cet unique fichier HTML pour pouvoir utiliser le component.
+Il suffira ensuite d'importer cet unique fichier pour pouvoir utiliser le component.
 
 \bigskip
 
@@ -112,17 +114,17 @@ Enfin, l'approche unitaire des Webcomponents permet une réusablitié importante
 Mais l'approche par component pose aussi des difficultés.
 En effet, il faut penser le composent en tant qu'élément générique.
 Si on fait un composent trop spécifique ou dépendant de ses voisins, il sera difficile de réutiliser le composant dans un autre contexte de celui pour lequel il etait prévu au début.
-Cela implique de réfléchir à la structure de l'application en amont et de changer la conception que l'on se fait d'une application.
-Il ne faut plus penser l'application dans son ensemble mais comme une ensemble de blocs réutilisables ajoutés les uns aux autres.
+Cela implique de réfléchir à la structure de l'application en amont.
+Et il ne faut plus penser l'application dans son ensemble mais comme une ensemble de blocs réutilisables ajoutés les uns aux autres.
 
 Faire un bloc réutilisable passe par l'utilisation des attributs HTML comme vecteurs de transmission d'informations.
 Mais aussi l'utilisation d'évennements Javascript comme vecteur de signal pour avertir les parents.
 
 \bigskip
 
-Dans ce projet, j'ai été amené à découvrir cette nouvelle norme du W3C par le biais des employés de l'entreprise qui utilisaient dàja cette technologie.
-J'ai découvert les webcomponents et ai expériment avec ceux ci durant ce projet.
-J'ai eu l'occasion, par le suite, d'affiner mes connaissances sur le sujet dans le cadre des 4 autres projets qui les utilisaient.
+Dans ce projet, j'ai été amené à découvrir cette nouvelle norme du W3C par le biais des employés de l'entreprise qui utilisaient déjà cette technologie.
+J'ai découvert les webcomponents et ai expérimenté avec ceux ci durant ce projet.
+J'ai eu l'occasion, par le suite, d'affiner mes connaissances sur le sujet dans le cadre des 5 autres projets qui les utilisent.
 
 \subsection{Structure}
 
@@ -136,10 +138,10 @@ Pour cette structure, j'ai puisé dans mes connaissances acquises durant ma form
 
 \subsubsection{Modèle}
 
-Le modèle est la partie de l'application qui définis l'organisation et le stockage des données requis par les éléments de l'application.
+Le modèle est la partie de l'application qui définis l'organisation et le stockage des données requis par les éléments de l'interface.
 
 Pour définir et stocker les donnée j'utilise la librairie d'ORM\footnote{Un ORM est une librairie apportant une couche d'abstraction aux reqètes SQL par l'utilisation des fonctionnalités Orientée Objet du langage dans laquelle elle est implémentée (Ex : Doctrine en PHP, Sequelize en JavaScript, Django ORM en Python, etc.)} \emph{Sequelize}.
-Elle a pour aventage d'être compatible avec la majeure partie des bases de données relationnelles les plus connues comme MySql, PostgreSQl, SQLite, etc.
+Elle a pour avantage d'être compatible avec la majeure partie des bases de données relationnelles les plus connues comme MySql, PostgreSQl, SQLite, etc.
 Dans cet ORM, on doit définir un modèle, ce modèle sera utilisé pour créer les tables de la base de données.
 J'ai décidé de définir ce modèle dans un unique fichier \texttt{model.js} permettant de centraliser leurs déclarations pour facilement les adapter en cas de changement d'avis du client.
 
@@ -147,10 +149,10 @@ L'objectif de cette structure est d'être le plus flexible possible pour pouvoir
 
 \bigskip
 
-Dans le cas de cette application pour BioMérieux, j'ai décider de découper les données en 5 entités.
+Dans le cas de cette application pour BioMérieux, j'ai décidé de découper les données en 5 entités.
 Ces entités représentent une table dans la base de données et permettent de faire le lien entre cette table et le code de l'applicaiton.
 Pour construire ce modèle de données, je me suis basé sur les designs de l'application faits par le graphiste et des informations données par mon maitre de stage.
-L'une des difficultés ici fut de ne pas avoir de cahier des charges défini, ce que m'a obligé à reprendre mon modèle plusieurs fois.
+L'une des difficultés ici fut de ne pas avoir de cahier des charges défini, ce qui m'obligé à reprendre mon modèle plusieurs fois.
 Mais la grande flexibilité du système m'as permis de continuer à développer sans me soucier de ces changements.
 
 \bigskip
@@ -197,13 +199,13 @@ Dans mon cas, j'ai choisi la deuxième option pour éviter de demander le dével
 Le BackOffice est un serveur web exécuté au sein de l'application Electron.
 Ce serveur web se base sur le modèle pour créer les formulaires de saisie des données.
 Le back-office ne présente aucun code spécifique au modèle de BioMérieux, mais met en place une arborescence de formulaires générés en fonction du modèle défini par le développeur.
-Cette technique permet de réutiliser ce back-office dans un tout autre contexte mais permet aussi de changer la modèle sans difficulté.
+Cette technique permet de réutiliser ce back-office dans un tout autre contexte mais permet aussi de changer le modèle sans difficulté.
 
 Pour ce backoffice j'ai utilisé \emph{Express} Une librairie permettant de créer des application Web très simplement et le moteur de template \emph{twig} que j'ai déjà utilisé dans le projet Web de l'exia.
 
 \bigskip
 
-Avec le recul de mon stage, je mre rend compte que le développement d'une application compagnon aurait été plus interessante pour éviter qu'un pirate ayant accès au réseau de l'application puisse librement en modifier le contenu.
+Avec le recul de mon stage, je me rend compte que le développement d'une application compagnon aurait été plus interessante pour éviter qu'un pirate ayant accès au réseau de l'application puisse librement en modifier le contenu.
 De plus, cela aurai permis d'améliorer les performances en évitant de démarre un serveur web à chaque utilisation de l'interface client.
 
 Mais, l'approche que j'ai utilisé permet une plus grande simplicité d'opération par la mise à jour en direct de la vue client et l'absence de fichier à transfèrer.
@@ -218,12 +220,12 @@ Dans cette partie, on utilise les WebComponents (\emph{cf} partie \ref{webcompon
 Parmi ces WebComponents, j'en ai créé des génériques permettant d'effectuer des tâches de base.
 
 
-\paragraph{DataElement} Le plus important de ces WebComponents car il permet, en tout point de l'application, de récupèrer des données depuis la base de données et dêtre avertis quand ces données changent.
-Cela permet de récupèrer les données mais aussi d'actualiser la vue en direct dès la modification des données.
+\paragraph{DataElement} Le plus important de ces WebComponents car il permet, en tout point de l'application, de récupèrer des données depuis la base de données et d'être averti quand ces données changent.
+Cela permet de récupèrer les données mais aussi d'actualiser la vue en direct dès la modification de ceux-ci.
 Cela est rendu possible par deux processus :
 \begin{description}
     \item[Hooks Sequelize] Les entités sequelize diposent de Hooks permettants d'appeler un fonction lors d'action spécifiques comme la creation, la supression ou la mise à jour de l'entitée. J'utilise ces Hooks pour alerter le \texttt{<data-element>} de la modification des données.
-    \item[IPC Electron] Electron, tout comme chromium, est un logiciel multi-processus. Le processus initial se charger de démarrer un processus enfant pour afficher les données. Ce processus initial est aussi en charge de la mise an route du back office. Pour que les modifications soient éfféctués dans tout les processus, j'envoie un signal IPC contenant l'entitée modifiée pour qu'elle soit mise à jour dans tout les processus.
+    \item[IPC Electron] Electron, tout comme chromium, est un logiciel multi-processus. Le processus initial se charge de démarrer un processus enfant pour afficher les données. Ce processus initial est aussi en charge de la mise en route du back office. Pour que les modifications soient éfféctués dans tout les processus, j'envoie un signal IPC contenant l'entitée modifiée pour qu'elle soit mise à jour dans tout les processus.
 \end{description}
 
 \paragraph{PageRouter} L'élément \texttt{<page-router>} permet de simuler le fonctionnement d'un système multipage.
@@ -250,12 +252,12 @@ Mai j'ai tout de même pus soumettre mon application a l'utilisateur final qui s
 
 Une nouvelle installation est planifiée pour le 12 Avril pour installer mon application dans le showroom et démarrer les premier tests en conditions réél.
 
-\subsection{conclusion}
+\subsection{Conclusion}
 \label{bmxconclusion}
 
-Ce projet fut le premier au sein de l'entreprise LTBL
-J'au eu l'occasion de ma familiariser avec les services, l'équipe de développement et de design et de découvrir les téchnologies utilisés en interne.
+Ce projet fut le premier au sein de l'entreprise LTBL.
+J'ai eu l'occasion de ma familiariser avec les services, l'équipe de développement et de design et de découvrir les téchnologies utilisés en interne.
 
 Ce projet fut mon premier projet utilisant les WebComponents et il m'a donné envie de creuser dans cette direction tant le sujet est vaster et interessant.
 En revanche, je me rend compte en fin de stage, que j'ai fait des érreurs de structure dans mon découpage.
-Ces érreurs ne peuvent malheuresement pas être corrigées dans le peu de temps qu'il me rêste pour finir mon stage mais me permettent de constater mon avencée dans cette nouvelle technologie.
+Ces érreurs ne peuvent malheuresement pas être corrigées dans le peu de temps qu'il me rêste pour finir mon stage mais me permettent de constater mon avancée dans cette nouvelle technologie.
