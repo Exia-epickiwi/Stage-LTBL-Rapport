@@ -3,7 +3,7 @@
 \subsection{Somfy}
 
 Somfy est un entreprise concevant des systèmes domotiques à l'attention du grand public.
-Dans une démarche de communication, Somfy a contacté LTBL pour la creation de 11 bornes interactives qui seront mises en palce dans les magasins vendant les produits de la marque.
+Dans une démarche de communication, Somfy a contacté LTBL pour la creation de 11 bornes interactives qui seront mises en place dans les magasins vendant les produits de la marque.
 
 \subsection{Besoins}
 
@@ -39,22 +39,22 @@ Le serveur X est le logiciel en charge d'afficher l'interface à l'utilisateur a
 
 Apres avoir installé ce logiciel, il faut installer un système de gestion de fenètres qui sera en charge d'afficher les différentes fenêtre à la bonne taille et dans le bon contexte.
 Pour le gestionnaire de fenêtres, j'ai choisi xfce car il est légé et propose beaucoup de fonctionnalités.
-Le gestionnaire de fenêtre est essentiel car il permet aux applications de correctement se dimentionner et de passer en plein ecran pour empècher l'utilisateur d'éfféctuer des actions non désirés.
+Le gestionnaire de fenêtre est essentiel car il permet aux applications de correctement se dimentionner et de passer en plein ecran pour empècher l'utilisateur d'éfféctuer des actions non désirées.
 
-Enfin, on peut installer notre application et la demarrer.
+Enfin, on peut installer notre application et la démarrer.
 
 Il faut bien sur automatiser tout cela pour que l'ensemble puisse se démarrer automatiquement en même temps que la machine pour éviter tout action manuelle de l'installateur.
 Pour ce faire j'ai été amené a modifier le pipeline de démarrage du système.
 Tout d'abord il faut créer un nouvel utilisateur qui sera en charge d'executer l'application pour eviter qu'elle ne soit éxécuté en tant qu'administrateur.
 Ensuite, il faut modifier le comportement de connexion sur la première console pour qu'elle se connecte automatiquement avec l'utilisateur en charge de l'execution du programme.
-L'utilisateur connecté, on execute le script de démarrage qui se charge de démarrer le sreveur X, le gestionnaire de fenêtres et l'application.
+L'utilisateur connecté, on execute le script de démarrage qui se charge de démarrer le serveur X, le gestionnaire de fenêtres et l'application.
 
 Nous disposons alors d'un système de kiosk fonctionnel et sécurisé.
 
 \subsection{Système de mise à jour}
 
 Pour permettre un mise à jour de l'application simplifiée j'ai été amené à réfléchir sur un système de mise à jour.
-Il n'est pas possible de connecter la borne a internet et cela implique que l'on ne peut pas mettre à jour a distance.
+Il n'est pas possible de connecter la borne à internet et cela implique que l'on ne peut pas mettre à jour à distance.
 Il fallait donc trouver un solution permettant de changer les fichiers de l'application sans pour autant nécéssiter la rapatriement des bornes chez LTBL .
 
 Pour ce système j'ai choisi d'utiliser un ensemble de scripts bash permettant d'avoir un grand contrôle sur le système avec un système de scripting simple et rapide.
@@ -66,28 +66,28 @@ Ce système permet de gerer le connexion, la déconnexion et le montage des elem
 En ajoutant des rêgles dans le fichier de configuration spécifique de udev, on peut executer une commande lors de la connexion ou la déconnexion d'un périphérique amovible.
 J'ai utilisé cette fonctionnélité pour vérifier si le support contien une mise à jour et lancer l'installation de la mise à jour dans ce cas.
 
-\paragraph{Fichier de verrouillage} Lors d'une mise à jour, le script installant cette mise àjour créer un fichier \texttt{update.lock} a la racine de l'application permettant d'indiquer que'une mise à jour est en cours.
+\paragraph{Fichier de verrouillage} Lors d'une mise à jour, le script installant cette mise àjour créer un fichier \texttt{update.lock} à la racine de l'application permettant d'indiquer que'une mise à jour est en cours.
 Il arrete alors de force l'application en cours d'éxécution pour l'installation de la mise à jour.
 On ajoutera alors au fichier \texttt{update.lock} les logs de toute la mise à jour pour suivre en temps reel sont déroulement.
 
 \paragraph{Scripts de mise à jour} Pour éviter que l'on puisse executer du code arbitraire en tant qu'administrateur sur la machine, seul un nombre limité d'actions peuvent être éfféctués durant une mise à jour.
 Chaque action représente un script dans le dossier \texttt{update} à la racine de l'application.
-chaque action dispose de ses paramètres.
+Chacune de ces actions disposent de ses paramètres.
 
 \medskip
 
-Chque mise à jour de l'application passe donc par un support amovible ce qui permet à n'importe quel personne de l'effectuer.
+Chque mise à jour de l'application passe donc par un support amovible ce qui permet à n'importe quel personne de l'efféctuer.
 Ce support amovible contien un fichier \texttt{update.conf}, un fichier texte décrivant pas à pas la procedure à adopter.
-Seul les actions disponibles sur la machine peuvent être éxécutés, a procedure n'est donc pas composée de commandes bash mais de nims de scripts présents dans le fichier \texttt{update}.
+Seul les actions disponibles sur la machine peuvent être éxécutés, la procedure n'est donc pas composée de commandes bash mais de noms de scripts présents dans le fichier \texttt{update}.
 Chaque mise à jour est aussi asosciée à un numéro de version présent dans le fichier \texttt{update.version}.
-Ce fichier est vérifier et sera copié à la fin de la mise à jour a la racine de l'application pour ne pas faire deux fois les mêmes opérations.
+Ce fichier est vérifié et sera copié à la fin de la mise à jour à la racine de l'application pour ne pas faire deux fois les mêmes opérations.
 
 %TODO donner un exemple de conf
 
 \subsection{Materiel \& Installation}
 
 Les machines en charge d'héberger l'appliction sont des NUC d'intel.
-Les NUC sont des mini machines crées par Intel et disposant d'un processeur directement soudés sur la carte mêre.
+Les NUC sont des mini machines crées par Intel et disposant d'un processeur directement soudé sur la carte mêre.
 Ces machines on l'avantage d'être trés compact.
 
 \begin{figure}[h]
@@ -101,7 +101,7 @@ J'ai ensuite utilisé CloneZilla pour faire une image du disque de cette machine
 
 Apres l'installation, nous avons trouvé quelques problèmes qui devaient être corrigés.
 N'ayant pas le temps de réinstaller un clone sur toutes les machines, nous avons mis en réseau toutes les machines.
-En réseau, il suffit alors d'utiliser \texttt{cssh} pour éfféctuer les mêmes actions en sychronisé sur toutes les machines.
+Il suffit alors d'utiliser \texttt{cssh} pour éfféctuer les mêmes actions en sychronisé sur toutes les machines.
 \texttt{cssh} est un utilitaire permettant de créer un certain nombre de terminaux ssh tous synchronisés;
 Il est alors aisé d'administrer un ensemble de machines en même temps.
 
