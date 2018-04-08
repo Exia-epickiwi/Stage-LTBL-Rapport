@@ -3,14 +3,14 @@
 \subsection{AccorHotels Arena}
 
 Accorhotel est le premier gerant d'hotel de france et le 6e mondial.
-A l'occasion d'un partenariat, le Palais omnisports de Paris-Bercy c'est vu renommé AccorHotel Arena pour 10 ans.
+A l'occasion d'un partenariat, le Palais omnisports de Paris-Bercy s'est vu renommé AccorHotel Arena pour 10 ans.
 
 Le site acceuillant beaucoup de concerts et de spectateurs, accorshotel a voulu communiquer au travers d'une installation interactive.
 Cette installation est un blind test composé d'un ecran et d'un Ipad permettant de saisir les réponses.
 
 Le jeu est simple : Une chanson est jouée sur l'écran et le titre de cette chanson est indiqué.
 Le joueur dispose alors de 45 secondes pour trouver l'artiste en question parmi les 4 proposés.
-On enchaîne ainsi sur 6 questions qui se terminent sur le résultat du jeu affiché à l'utilisateur.e installation permettant de jouer à un Blind Test sur un écran.
+On enchaîne ainsi sur 6 questions qui se terminent sur le résultat du jeu affiché à l'utilisateur.
 
 \subsection{Technologies}
 
@@ -20,10 +20,10 @@ Enfin, on utilise \emph{Socket.io} pour les WebSocket apportant de l'interactivi
 
 \subsubsection{Express}
 
-Express est une librairie utilisant les capacités de NodeJs (inclus dans electron) à mettre en place un serveur web.
+Express est une librairie utilisant les capacités de NodeJs (inclus dans \emph{Electron}) à mettre en place un serveur web.
 Express permet de répondre à une URL mais aussi de servir des fichiers en tout genre.
 
-Nous avons choisis express car il est légé et simple à mettre en place.
+Nous avons choisi Express car il est légé et simple à mettre en place.
 Il dispose d'une grande communauté et permet de mettre en place un serveur web et websocket rapidement.
 
 Nous n'avions pas besoin ici d'une solution plus lourde car les seuls interactions HTTP sont les demandes de médias comme la musique et les images ou la demande de page WEB.
@@ -34,7 +34,7 @@ Le reste des interactions s'éfféctuent au travers des Websockets.
 La technologie de Websocket est un protocol web de connexion bidirectionnel semblables aux sockets.
 Ils permettent au serveur et au client de conserver une connexion TCP bidirectionnel.
 
-Ainsi il est possible au client d'envoyer des paquets arbitraires au serveur mais aussi, et c'est le plus interessant, au serveur d'envoyer des paquets au client a n'importe quel moment.
+Ainsi il est possible au client d'envoyer des paquets arbitraires au serveur mais aussi, et c'est le plus interessant, au serveur d'envoyer des paquets au client à n'importe quel moment.
 Ainsi, il est possible de rendre l'application tres interactive et dynamique.
 
 Nous avons utilisé les WebSockets pour toute la communication entre le serveur et les clients (Ecran et Ipad) avec l'aide de Socket.io.
@@ -102,7 +102,7 @@ Cette borne Wifi fait office de routeur vers l'exterieur mais aussi de serveur D
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.1]{img/accorhotel-blindtest-resize.jpg}
+    \includegraphics[scale=0.15]{img/accorhotel-blindtest-resize.jpg}
     \caption{Installation du Blind test au AccorHotel Arena}
 \end{figure}
 
