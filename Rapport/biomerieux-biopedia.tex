@@ -8,73 +8,73 @@
 \end{figure}
 
 Biopedia est un projet de longue date pour LTBL .
-L'objectif de cette application est de présenter les données d'une base de données de BioMérieux sous forme de graph pour la présentation aux clients interessés.
+L'objectif de cette application est de présenter les données d'une base de données de BioMérieux sous forme de graphe pour la présentation aux clients intéressés.
 
-Au momment où j'ecrit ces lignes, je sous toujours en train de développer activement cette application pour la présenter au client final le 20 Avril;
+Au moment où j'écris ces lignes, je sous toujours en train de développer activement cette application pour la présenter au client final le 20 avril;
 Certaines informations pourront alors changer à l'avenir.
 
 \subsection{Application précédente}
 \label{biomerieuxBiopediaApplicationPrécédente}
 
-Cela longtemps que LTBL à ce projet de visualisation de graphs et une première version à déjà été présentée.
-Mais cette application se basait sur une vielle librairie et de nouvelles fonctionnalités ont été demandées par le client.
+Cela longtemps que LTBL à ce projet de visualisation de graphes et une première version a déjà été présentée.
+Mais cette application se basait sur une vieille librairie et de nouvelles fonctionnalités ont été demandées par le client.
 
-Apres, uyne étude du code de cette application nous avons décidé de revoir complètement son code.
-Je me suis donc lancé sur la creation d'une tout nouvelle application de visualisation.
+Âpres, une étude du code de cette application nous avons décidé de revoir complètement son code.
+Je me suis donc lancé sur la création d'une toute nouvelle application de visualisation.
 
 Cette application devra disposer des fonctionnalités suivantes :
 
 \begin{itemize}
-    \item Afficher les données dans un graph en 3 dimentions
-    \item Afficher les nom des doeuds du graph quand on clique dessus
-    \item Afficher les parents et enfant de ce noeud lors de la selection
-    \item Aisément naviguer dans les données
-    \item Afficher une potion du graph uniquement dans le cadre d'une étude de cas
+    \item Afficher les données dans un graphe en 3 dimensions
+    \item Afficher les noms des noeuds du graphe quand on clique dessus
+    \item Afficher les parents et enfants de ce noeud lors de la sélection
+    \item Aisément, naviguer dans les données
+    \item Afficher une potion du graphe uniquement dans le cadre d'une étude de cas
 \end{itemize}
 
-\subsection{Téchnologies}
+\subsection{Technologies}
 \label{biomerieuxBiopediaTéchnologies}
 
-Pour créer cette application, je me souis tout d'abord tourné vers Unity\footnote{Unity est un moteur de jeu permettant d'afficher dans une scene en 3D des structures associés à des materiaux.} pour la creation d'un environnement en 3 dimentions.
-Unity permet d'avoir des environnnements 3D tres interactifs et facile à utiliser.
-Mais j'ai aussi remarqué un manque évident de librairies permettant de créer des graphs comme dans l'ancienne version de biopedia.
-De plus, je n'allait pas passer les 3 semaines dédiés à ce projet pour la recréation d'une graphique de ce type.
+Pour créer cette application, je me suis tout d'abord tourné vers Unity\footnote{Unity est un moteur de jeu permettant d'afficher dans une scène en 3D des structures associées à des matériaux.} Pour la création d'un environnement en 3 dimensions.
+Unity permet d'avoir des environnements 3D très interactifs et faciles à utiliser.
+Mais j'ai aussi remarqué un manque évident de librairies permettant de créer des graphes comme dans l'ancienne version de Biopedia.
+De plus, je n'allais pas passer les 3 semaines dédié à ce projet pour la recréation d'un graphique de ce type.
 
-J'ai donc décider de retourner sur une solution Web avec Electron et ls Webcomponents.
-Pour ce faire, j'ai utilisé la librairie \emph{3d-force-graph} se basant sur \emph{ThreeJS} pour l'affichage en 3D dans un canvas WebGL.
+J'ai donc décidé de retourner sur une solution Web avec Electron et les WebComponents.
+Pour ce faire, j'ai utilisé la librairie \emph{3d-force-graph} se basant sur \emph{ThreeJS} pour l'affichage en 3D dans un Cana WebGL.
 
-\emph{ThreeJs} est la principale librairie permettant de concevoir des scenes en 3D avec WebGL .
-Elle permet de placer des primitives dans la scene 3D et de faire diverses actions comme des mouvements de camera, l'utilsiation de materianx et la creation d'animations.
+\emph{ThreeJs} est la principale librairie permettant de concevoir des scènes en 3D avec WebGL .
+Elle permet de placer des primitives dans la scène 3D et de faire diverses actions comme des mouvements de caméra, l'utilisation de matériaux et la création d'animations.
 Dans mon cas, je l'utilise pour représenter le graphique des données.
 
 \subsection{Force-directed graph}
 \label{biomerieuxBiopediaForceDirectedGraph}
 
 Les données de BioMérieux sont des données réparties en Graph.
-Cela signifie que ce sont des données représentés par un ensemple de \emph{Noeuds} reliés ensemble par des \emph{Relations}.
-les relations de ce graph sont orientées, c'est a dire qu'elles disposent d'un noeud source et d'un noeud cible.
-Ce type de graph peut être représenter de multiples manières mais la technique que j'ai utilisé ici est la technique du \emph{Force-directed Graph}.
+Cela signifie que ce sont des données représentées par un ensemble de \emph{noeuds} reliés ensemble par des \emph{Relations}.
+Les relations de ce graphe sont orientées, c'est-à-dire qu'elles disposent d'un noeud source et d'un noeud cible.
+Ce type de graphe peut être représenté de multiples manières, mais la technique que j'ai utilisée ici est la technique du \emph{Force-directed Graph}.
 
-Cette technique consiste à considèrer chaque noeud comme un objet physique dans l'espace (ou le plan suivant le nombre de dimentions) et chaque relation comme un ressort reliant les noeuds.
+Cette technique consiste à considérer chaque noeud comme un objet physique dans l'espace (ou le plan suivant le nombre de dimensions) et chaque relation comme un ressort reliant les noeuds.
 On applique alors des forces sur les noeuds et on applique les lois de la physique au fil du temps pour obtenir un rendu graphiquement plaisant.
-Cela peut prendre un certain temps avant d'avoir un resultat satisefaisant car ce système est itératif.
-Il nécéssite alors une évolution du graph jusqu'a atteindre un etat de stabilité.
+Cela peut prendre un certain temps avant d'avoir un résultat satisfaisant, car ce système est itératif.
+Il nécessite alors une évolution du graphe jusqu'à atteindre un état de stabilité.
 
-Je me suis interessé à la simulation de ce genre de système pour l'implémenter dans Unity mais due a une deadline assez proche, j'ai été obligé de trouver une librairie proposant une simulation de la position des noeuds.
+Je me suis intéressé à la simulation de ce genre de système pour l'implémenter dans Unity, mais due à un deadline assez proche, j'ai été obligé de trouver une librairie proposant une simulation de la position des noeuds.
 
 \subsubsection{Nomenclature}
 \label{biomerieuxBiopediaNomenclature}
 
-Le graph de biomérieux dispose d'une nomenclature spécifique permettant de repèrer les différents éléments.
-Dans notre cas, les couleurs montrent la position des noeuds dans l'arboréscense et non un type particulier.
+Le graphe de BioMérieux dispose d'une nomenclature spécifique permettant de repérer les différents éléments.
+Dans notre cas, les couleurs montrent la position des noeuds dans l'arborescence et non un type particulier.
 
 \begin{description}
-    \item[Neud vert] Représente une feille du graph soit un noeud qui ne dispose que de relations dans sa direction et aucune raltion ne partant de ce noeud
-    \item[Neud bleu] Représente un noeud intérmediere soit un oeud disposant de relations depuis et vers lui
-    \item[Neud jaune] Représente un noeud racine soit un neud qui ne dispose d'aucune relation dans sa direction
+    \item[Noeud vert] Représente une faille du graph soit un noeud qui ne dispose que de relations dans sa direction et aucune relation ne partant de ce noeud
+    \item[Noeud bleu] Représente un noeud intermédiaire soit un noeud disposant de relations depuis et vers lui
+    \item[Noeud jaune] Représente un noeud racine soit un noeud qui ne dispose d'aucune relation dans sa direction
 \end{description}
 
-Chaque noeud de biopedia dispose de métadonnés donnat plus d'informations sur le noeud actuellement séléctionné.
+Chaque noeud de Biopedia dispose de métadonnées donnant plus d'informations sur le noeud actuellement sélectionné.
 
 \subsection{Structure}
 \label{biomerieuxBiopediaStructure}
@@ -89,23 +89,23 @@ Dans cette application, j'utilise toutes les compétences acquises durant les pr
 
 \clearpage
 
-Le différents components composant cetta pplication sont les suivants :
+Le différent component composant cette application sont les suivants :
 
-\paragraph{Graph view} Le lecteur de graphique permettant d'afficher un graphque des données en 3 dimentions a l'aide de \emph{ThreeJs}.
-Il est possible de cliquer sur les noeuds du graphique pour le selectionner et afficher diverses informations dans la barre de contrôle présente sur la droite de l'interface.
+\paragraph{Graph view} Le lecteur de graphique permettant d'afficher un graphique des données en 3 dimensions a l'aide de \emph{ThreeJs}.
+Il est possible de cliquer sur les noeuds du graphique pour le sélectionner et afficher diverses informations dans la barre de contrôle présente sur la droite de l'interface.
 
 \paragraph{Node view} En charge de formater l'affichage d'un noeud sur l'interface.
 Ce component est totalement indépendant des autres et permet juste d'afficher un noeud avec un design constant.
-Il est utilisé pour afficher le noeud séléctionné avec les diverses métadonnées qui lui sont associés dans la barre de contrôle.
+Il est utilisé pour afficher le noeud sélectionné avec les diverses métadonnées qui lui sont associées dans la barre de contrôle.
 Mais il est aussi utilisé dans la liste de noeuds aléatoire permettant de rapidement démarrer une navigation dans le graphique.
 
-\paragraph{Prset view} Dans le même objectif d'unifier le design de l'affichage des différents preset, ce component sert à afficher un preset a l'utilisateur.
-Il est utilisé dans la barre de contrôle et permet de séléctionner un preset pour filtrer l'affichage des données dans le graph.
+\paragraph{Preset view} Dans le même objectif d'unifier le design de l'affichage des différents presets, ce component sert à afficher un preset à l'utilisateur.
+Il est utilisé dans la barre de contrôle et permet de sélectionner un preset pour filtrer l'affichage des données dans le graphe.
 
 \subsection{Conclusion}
 \label{biomerieuxBiopediaConclusion}
 
-Ce projet n'étant pas ecore fini, certaines informations et strucures peuvent changer.
+Ce projet n'étant pas encore fini, certaines informations et structures peuvent changer.
 Mais ce projet m'a permis de revoir mon évolution et les compétences acquises durant mon stage.
-De plus j'ai eu l'occasion de découvrir la 3D dans le navigateur avec ThreeJs et les simulations de grahiques en 3 dimentions.
-Ce projet fut très instructif et unique comme tout les projets chez LTBL.
+De plus, j'ai eu l'occasion de découvrir la 3D dans le navigateur avec ThreeJs et les simulations de graphiques en 3 dimensions.
+Ce projet fut très instructif et unique comme tous les projets chez LTBL.

@@ -2,14 +2,14 @@
 
 \subsection{AccorHotels Arena}
 
-Accorhotel est le premier gerant d'hotel de france et le 6e mondial.
-A l'occasion d'un partenariat, le Palais omnisports de Paris-Bercy s'est vu renommé AccorHotel Arena pour 10 ans.
+Accorhotel est le premier gérant d'hôtel de France et le 6e mondial.
+À l'occasion d'un partenariat, le Palais omnisports de Paris-Bercy s'est vu renommé AccorHotel Arena pour 10 ans.
 
-Le site acceuillant beaucoup de concerts et de spectateurs, accorshotel a voulu communiquer au travers d'une installation interactive.
-Cette installation est un blind test composé d'un ecran et d'un Ipad permettant de saisir les réponses.
+Le site accueillant beaucoup de concerts et de spectateurs, Accorshotel a voulu communiquer au travers d'une installation interactive.
+Cette installation est un blind test composé d'un écran et d'un iPad permettant de saisir les réponses.
 
-Le jeu est simple : Une chanson est jouée sur l'écran et le titre de cette chanson est indiqué.
-Le joueur dispose alors de 45 secondes pour trouver l'artiste en question parmi les 4 proposés.
+Le jeu est simple : une chanson est jouée sur l'écran et le titre de cette chanson est indiqué.
+Le joueur dispose alors de 45 secondes pour trouver l'artiste en question parmi les 4 proposé.
 On enchaîne ainsi sur 6 questions qui se terminent sur le résultat du jeu affiché à l'utilisateur.
 
 \subsection{Technologies}
@@ -20,29 +20,29 @@ Enfin, on utilise \emph{Socket.io} pour les WebSocket apportant de l'interactivi
 
 \subsubsection{Express}
 
-Express est une librairie utilisant les capacités de NodeJs (inclus dans \emph{Electron}) à mettre en place un serveur web.
-Express permet de répondre à une URL mais aussi de servir des fichiers en tout genre.
+Express est une librairie utilisant les capacités de NodeJs (inclus dans \emph{Electron}) à mettre en place un serveur Web.
+Express permet de répondre à une URL, mais aussi de servir des fichiers en tout genre.
 
-Nous avons choisi Express car il est légé et simple à mettre en place.
-Il dispose d'une grande communauté et permet de mettre en place un serveur web et websocket rapidement.
+Nous avons choisi Express car il est léger et simple à mettre en place.
+Il dispose d'une grande communauté et permet de mettre en place un serveur Web et websocket rapidement.
 
-Nous n'avions pas besoin ici d'une solution plus lourde car les seuls interactions HTTP sont les demandes de médias comme la musique et les images ou la demande de page WEB.
-Le reste des interactions s'éfféctuent au travers des Websockets.
+Nous n'avions pas besoin ici d'une solution plus lourde car les seules interactions HTTP sont les demandes de médias comme la musique et les images ou la demande de page WEB.
+Le reste des interactions s'effectuent au travers des Websockets.
 
 \subsubsection{WebSockets}
 
-La technologie de Websocket est un protocol web de connexion bidirectionnel semblables aux sockets.
-Ils permettent au serveur et au client de conserver une connexion TCP bidirectionnel.
+La technologie de Websocket est un protocole Web de connexion bidirectionnel semblable aux sockets.
+Ils permettent au serveur et au client de conserver une connexion TCP bidirectionnelle.
 
-Ainsi il est possible au client d'envoyer des paquets arbitraires au serveur mais aussi, et c'est le plus interessant, au serveur d'envoyer des paquets au client à n'importe quel moment.
-Ainsi, il est possible de rendre l'application tres interactive et dynamique.
+Ainsi il est possible au client d'envoyer des paquets arbitraires au serveur, mais aussi, et c'est le plus intéressant, au serveur d'envoyer des paquets au client à n'importe quel moment.
+Ainsi, il est possible de rendre l'application très interactive et dynamique.
 
-Nous avons utilisé les WebSockets pour toute la communication entre le serveur et les clients (Ecran et Ipad) avec l'aide de Socket.io.
-Cette librairie se place comme une surcouche aux websocket et reprend l'aspect évenementiel de Nodejs.
-En effet, elle met a disposition du developpeur un objet \texttt{socket} agissant comme un emetteur et un recepteur d'évenements.
-chaque évenement est composé d'un nom et d'un objet de contexte.
-Lors de l'émission, l'objet \texttt{socket} transmet l'évenement et le contexte au client connecté.
-Il est aussi possible de recevoir des évenements et ainsi de communiquer de manière bidirectionnel.
+Nous avons utilisé les WebSockets pour toute la communication entre le serveur et les clients (Écran et iPad) avec l'aide de Socket.io.
+Cette librairie se place comme une surcouche aux websocket et reprend l'aspect événementiel de Nodejs.
+En effet, elle met à disposition du développeur un objet \texttt{socket} agissant comme un émetteur et un récepteur d'événements.
+Chaque événement est composé d'un nom et d'un objet de contexte.
+Lors de l'émission, l'objet \texttt{socket} transmet l'événement et le contexte au client connecté.
+Il est aussi possible de recevoir des événements et ainsi de communiquer de manière bidirectionnelle.
 
 \subsection{Structure}
 
@@ -53,12 +53,12 @@ Il présente un serveur de fichiers permettant l'accès aux fichiers audio, aux 
 Il dispose aussi d'un serveur WebSockets permettant une communication bidirectionnelle entre les clients (iPad et TV) et le serveur.
 
 Ce serveur Web dispose d'un état définissant l'état actuel du jeu.
-Cet état est transmis à tous les clients pour qu'ils actualisent leur affichaient lors d'un changement et de la connexion d'un nouveau client.
+Cet état est transmis à tous les clients pour qu'ils actualisent leurs affichages lors d'un changement et de la connexion d'un nouveau client.
 
 Le serveur Web construit en parallèle un objet Javascript \texttt{Game} contenant toutes les questions à poser, la question actuellement posée, les réponses des joueurs et le score.
 Cet objet \texttt{Game} est transmis à chaque client lors de leur connexion ou lors du changement d'état du jeu.
 
-Des que l'etat du jeu change, un evenement socket.io est transmis à tout les clients connectés pour qu'ils actualisent leur affichage en fonction des données transmises par le serveur.
+Dès que l'état du jeu change, un événement socket.io est transmis à tous les clients connectés pour qu'ils actualisent leur affichage en fonction des données transmises par le serveur.
 
 \paragraph{Les clients (TV et iPad)} Chacun charge une page HTML spécifique possédant un script spécifique.
 Ce script va afficher le bon écran en fonction de l'état du jeu envoyé par le serveur et, éventuellement, demander une interaction à l'utilisateur.
@@ -73,11 +73,11 @@ Le jeu continue alors jusqu'a ce que toutes les questions de tous les joueurs so
 \end{figure}
 
 \subparagraph{TV} Coté TV, l'affichage est simple et permet d'afficher le score de l'utilisateur ainsi que de jouer la musique.
-L'ecran n'etant pas tactile, il ne permet que l'affichage d'informations sur l'etat du jeu mais aucune interactivité n'est possible directement.
-Le client TV est une fenêtre de l'application Electron qui se connecte au sereveur express pour y charger l'interface.
+L'écran n'étant pas tactile, il ne permet que l'affichage d'informations sur l'état du jeu, mais aucune interactivité n'est possible directement.
+Le client TV est une fenêtre de l'application Electron qui se connecte au serveur express pour y charger l'interface.
 
-\subparagraph{Ipad} Coté Ipad, une application de kiosk permet d'afficher une page Web sans autre élément d'interface.
-Cette page Web est chargée depuis le serveur et propose des choix a l'utilisateur en fonction de l'etat du jeu.
+\subparagraph{iPad} Coté iPad, une application de kiosque permet d'afficher une page Web sans autre élément d'interface.
+Cette page Web est chargée depuis le serveur et propose des choix à l'utilisateur en fonction de l'état du jeu.
 Cela peut être le nombre de joueurs, le nom de l'artiste en cours de lecture ou simplement une demande pour passer à la question suivante.
 
 \subsubsection{Design}
@@ -93,16 +93,16 @@ Le design de l'application était fourni avec la demande du client et nous avons
 
 \subsubsection{Installation}
 
-Je n'ai pas pu assister à l'installation du lundi 29 janvier mais j'ai tout de même travailler dessus a l'occasion de correctionde bugs.
+Je n'ai pas pu assister à l'installation du lundi 29 janvier, mais j'ai tout de même travaillé dessus à l'occasion de correction de bugs.
 
-L'installation présente un grand écran connecté au serveur affichant l'interface TV sur uen machine Windows herbergeant le serveur websocket que l'Ipad pourras contacter.
-On y retrouve bien evidemment L'Ipad vérouillé pour éviter de sortir de l'application.
-Ces deux terminaux sont connectés à une même borne Wifi permettant de disposer de son propre réseau évitant ainsi les latances dues a une éventuelle surcharge du réseau environnant.
-Cette borne Wifi fait office de routeur vers l'exterieur mais aussi de serveur DHCP et de point d'acces Wifi.
+L'installation présente un grand écran connecté au serveur affichant l'interface TV sur une machine Windows hébergeant le serveur websocket que l'iPad pourra contacter.
+On y retrouve bien évidemment L'iPad verrouillé pour éviter de sortir de l'application.
+Ces deux terminaux sont connectés à une même borne WiFi permettant de disposer de son propre réseau évitant ainsi les latences dues à une éventuelle surcharge du réseau environnant.
+Cette borne WiFi fait office de routeur vers l'extérieur, mais aussi de serveur DHCP et de point d'accès WiFi.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.15]{img/accorhotel-blindtest-resize.jpg}
+    \includegraphics[scale=0.4]{img/accorhotel-blindtest-resize.jpg}
     \caption{Installation du Blind test au AccorHotel Arena}
 \end{figure}
 
@@ -110,4 +110,4 @@ Cette borne Wifi fait office de routeur vers l'exterieur mais aussi de serveur D
 
 Ce projet fut intéressant et intense, car nous l'avons réalisé en seulement 2 jours.
 Ce fut une bonne expérience de travail d'équipe et m'a permis de tester un projet à court délai.
-Enfin, ce projet m'a permis de voir les techniques permettant de synchroniser l'etats de multiples machines au travers de Websocket.
+Enfin, ce projet m'a permis de voir les techniques permettant de synchroniser l'état de multiples machines au travers de Websocket.
