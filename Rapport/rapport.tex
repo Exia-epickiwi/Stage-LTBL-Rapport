@@ -8,10 +8,11 @@
 \usepackage{multicol}
 \usepackage{pdflscape}
 \usepackage[pdfborder={0 0 0}]{hyperref}
+\usepackage{xspace}
 
 \title{\includegraphics{img/logo.png}\vspace{2cm}\\
-Stage chez Let There Be Light \\
-\large Rapport de stage Exia A4}
+Stage à Let There Be Light \\
+\large Rapport de stage Exia A3}
 
 \date{12 Avril 2018}
 
@@ -19,10 +20,32 @@ Stage chez Let There Be Light \\
 Maître de stage : Benjamin \bsc{Petit}\\
 Pilote de formation : Julio \bsc{Santilario}}
 
+% MOTS REPETES
+
+\newcommand{\component}{\emph{component}\xspace}
+\newcommand{\components}{\emph{components}\xspace}
+\newcommand{\ah}{AccorHotel\xspace}
+\newcommand{\aha}{AccorHotel Arena\xspace}
+
 \begin{document}
 
     \maketitle
+
+    \vspace{2cm}
+
+    \hspace{\fill}
+    \begin{minipage}{10cm}
+        \begin{center}
+            \textbf{\large Confidentialité}\par
+            \textbf{Diffusion libre}
+        \end{center}
+        Les  destinataires  peuvent  conserver  leur  exemplaire.
+        Un  exemplaire  est  conservé  au centre de documentation où il peut être librement consulté et reproduit.
+    \end{minipage}
+    \hspace{\fill}
+
     \vspace{\fill}
+
     \hspace{\fill}\includegraphics{img/exia.png}
 
     \clearpage
@@ -34,7 +57,7 @@ Pilote de formation : Julio \bsc{Santilario}}
     Dans le cadre de ma 3\up{e} année au CESI EXia, j'ai effectué un stage chez Let There Be Light de 4 mois.
     Cette entreprise réalise des dispositifs interactifs pour l'événementiel, la communication et la culture.
 
-    Ce rapport relate de cette entreprise et des projets sur lesquels j'ai travaillé.
+    Dans ce rapport, je décrit les missions qui m'ont été confiés et les projets sur lesquels j'ai travaillé.
 
     \clearpage
 
@@ -42,8 +65,8 @@ Pilote de formation : Julio \bsc{Santilario}}
 
     \vspace{\fill}
 
-    Je tiens à remercier Benjamin \bsc{Petit}, mon maître de stage, pour m'avoir offert l'opportunité de réaliser ces 15 semaines de stage au sein de son entreprise, merci à l'attention qu'il m'a portée tout au long.
-    Je tiens également à remercier mon collègue de travail, Corentin \bsc{Limoge} pour toute l'aide qu'ils m'a apporté dans mon travail, ainsi que toute l'équipe de Vendredi 4 pour leur accueil et leur gentillesse.
+    Je tiens à remercier Benjamin \bsc{Petit}, mon maître de stage, pour m'avoir offert l'opportunité de réaliser ces 15 semaines de stage au sein de son entreprise, merci de m'avoir accompagné durant ce stage et de m'avoir fait découvrir le monde du creative coding.
+    Je tiens également à remercier mon collègue de travail, Corentin \bsc{Limoge} pour toute l'aide qu'il m'a apporté dans mon travail, ainsi que toute l'équipe de Vendredi 4 pour leur accueil et leur gentillesse.
 
     \vspace{\fill}
 
@@ -119,7 +142,7 @@ Pilote de formation : Julio \bsc{Santilario}}
 
     En fin de stage, je me rends compte des erreurs que j'ai faites dans les premières applications que j'ai produites et cela montre mon avancée dans le domaine et les compétences que j'ai acquises.
 
-    Ce stage fut incroyablement différent des autres stages que j'ai pu faire.
+    Ce stage fut très différent des autres stages que j'ai pu faire.
     L'entreprise LTBL est une petite entreprise, mais avec de nombreux projets très diversifiés qui sont tous plus intéressants les uns que les autres.
     Même si mon premier objectif n'était pas de faire du Web durant ce stage, j'ai tout de même appris et découvert encore plus de nouveautés que je ne l'imaginais.
 
@@ -140,10 +163,9 @@ Pilote de formation : Julio \bsc{Santilario}}
 
     Dans toutes ces applications, j'ai utilisé Electron et les technologies Web, très adaptés au domaine de l'interface homme-machine.
     Electron réduisant beaucoup le champ de compatibilité nécessaire, j'ai eu l'occasion de travailler sur les toutes nouvelles spécifications du W3C en matière de WebComponents.
-    Les WebComponents sont des éléments HTML personnalisés ayant un objectif unique et pouvant être utilisés dans de nombreuses situations.
 
-    Pour résoudre certains problèmes d'animation et de synchronisation, j'ai eu l'occasion de concevoir de nouveaux components.
-    De nouveaux components comme l’ \texttt{animation-block} permettant d'ajouter des animations sur l'application en fin de production sans changer la structure de l'application.
+    Pour résoudre certains problèmes d'animation et de synchronisation, j'ai eu l'occasion de concevoir de nouveaux \components.
+    De nouveaux \components comme l’ \texttt{animation-block} permettant d'ajouter des animations sur l'application en fin de production sans changer la structure de l'application.
     J'ai aussi eu l'occasion de concevoir le système de store permettant de centraliser la gestion des données et de rendre les applications dynamiques.
 
     Pour conclure, ce stage fut une très bonne expérience et j'ai beaucoup appris de mes projets, de mes collègues et des installations que j'ai été amené à faire.

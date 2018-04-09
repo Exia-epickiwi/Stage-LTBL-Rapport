@@ -23,7 +23,7 @@ Nous avons mis en place 3 solutions pour ce chantier.
 
 La première est une table tactile sur laquelle il est possible d'ouvrir, de manipuler et d'annoter les plans depuis le serveur central.
 Cela vient remplacer les impressions successives de plans pour les annotations et les modifications.
-Cela permet de réduire la consommation d'encre et de papier.
+Cela permet de réduire la consommation d'encre et de papier mais aussi de gagner du temps.
 
 La seconde est un écran d'affichage permettant de positionner des Post-its sur un plan.
 Ces Post-its sont associés à une personne et définissent les tâches à accomplir.
@@ -56,7 +56,7 @@ Le lecteur de Media Eiffage doit donc disposer des fonctionnalités suivantes :
     \item Se connecter à un emplacement réseau
     \item Lister le contenu des dossiers et pouvoir naviguer dans l'arborescence
     \item Afficher un aperçu des fichiers images, vidéo et PDF
-    \item Integrer l'application dans un contexte Active Directory où chaque utilisateur doit pouvoir ouvrir sa session personnelle
+    \item Intégrer l'application dans un contexte Active Directory où chaque utilisateur doit pouvoir ouvrir sa session personnelle
 \end{itemize}
 
 La courte liste des fonctionnalités m'a permis de travailler plus en profondeur sur la structure de l'application et ainsi de développer des fonctionnalités solides.
@@ -160,7 +160,7 @@ Le pipeline d'animation est alors le suivant :
 Il est bien sûr possible de créer ses propres animations en spécifiant manuellement les différentes classes à utiliser, mais les deux animations (\texttt{enter} et \texttt{leave}) sont des animations normalisées.
 
 Dès qu'une animation est déclenchée, une promesse est renvoyée pour permettre de savoir quand elle se terminera.
-Cela permet d'effectuer des actions âpres que l'animation soit passée comme réinitialiser des données ou effectuer des actions en arrière-plan.
+Cela permet d'effectuer des actions après que l'animation soit passée comme réinitialiser des données ou effectuer des actions en arrière-plan.
 
 Enfin, le component \texttt{Animated Block} dispose d'une fonction statique \texttt{animateStack()} permettant d'animer un ensemble d'éléments les uns après les autres en exécutant simplement une fonction.
 
@@ -204,7 +204,7 @@ J'ai donc effectué beaucoup d'expériences avec de nombreux changements de para
 Malheureusement, beaucoup de fonctionnalités gestuelles n'ont pas été retenues, car elles n'apportèrent qu'une frustration supplémentaire pour l'utilisateur.
 
 Dans un second temps je me suis aussi heurté au problème des PDF d'Eiffage.
-Les plans sont dance ce format et son t générés automatiquement par le logiciel d'architecture.
+Les plans sont dans ce format et sont générés automatiquement par le logiciel d'architecture.
 Il en résulte des documents de très grosse taille et complexe à afficher, ainsi chaque rendu pouvait prendre près de 30 secondes.
 Un temps que l'on doit réduire le plus possible pour éviter une attente de la part de l'utilisateur.
 Pour réduire ce temps, j'ai mis en place un système qui analyse le zoom effectué et qui ne lance un rendu qu'en cas de zoom important.
@@ -224,6 +224,6 @@ J'ai aussi ajouté un bouton de déconnexion permettant de se déconnecter de la
 
 \subsection{Conclusion}
 
-Ce projet fut intéressant, car il m'a permis, au travers d'un sujet simple, de poursuivre ma découverte des WebComponents et des interfaces tactiles.
-J'ai rencontré des obstacles intéressant qui m'on fait prendre conscience de la difficulté de créer des interfaces tactiles de qualité.
-Malgré ces problèmes, j'ai réussi à livrer une application fonctionnelle et de qualité dont les composants peuvent aisément être intégrés dans les 2 autres projets d'Eiffage
+Ce projet m'a permis, au travers d'un sujet simple, de poursuivre ma découverte des WebComponents et des interfaces tactiles.
+J'ai rencontré des obstacles qui m'on fait prendre conscience de la difficulté de créer des interfaces tactiles de qualité et le développement de gestes tactiles qui sembles naturels.
+Malgré ces problèmes, j'ai réussi à livrer une application fonctionnelle et dont les composants peuvent aisément être intégrés dans les 2 autres projets d'Eiffage qui ont aussi besoin d'un explorateur de fichiers.

@@ -1,9 +1,9 @@
-\section{Blind Test Accorshotel Arena}
+\section{Blind Test \aha}
 
-\subsection{AccorHotels Arena}
+\subsection{\ah Arena}
 
-Accorhotel est le premier gérant d'hôtel de France et le 6e mondial.
-À l'occasion d'un partenariat, le Palais omnisports de Paris-Bercy s'est vu renommé AccorHotel Arena pour 10 ans.
+\ah est le premier gérant d'hôtel de France et le 6e mondial.
+À l'occasion d'un partenariat, le Palais omnisports de Paris-Bercy s'est vu renommé \aha pour 10 ans.
 
 Le site accueillant beaucoup de concerts et de spectateurs, Accorshotel a voulu communiquer au travers d'une installation interactive.
 Cette installation est un blind test composé d'un écran et d'un iPad permettant de saisir les réponses.
@@ -31,10 +31,10 @@ Le reste des interactions s'effectuent au travers des Websockets.
 
 \subsubsection{WebSockets}
 
-La technologie de Websocket est un protocole Web de connexion bidirectionnel semblable aux sockets.
+La technologie de Websocket est un protocole Web de connexion bidirectionnel.
 Ils permettent au serveur et au client de conserver une connexion TCP bidirectionnelle.
 
-Ainsi il est possible au client d'envoyer des paquets arbitraires au serveur, mais aussi, et c'est le plus intéressant, au serveur d'envoyer des paquets au client à n'importe quel moment.
+Ainsi il est possible au client d'envoyer des paquets arbitraires au serveur, mais aussi au serveur d'envoyer des paquets au client à n'importe quel moment.
 Ainsi, il est possible de rendre l'application très interactive et dynamique.
 
 Nous avons utilisé les WebSockets pour toute la communication entre le serveur et les clients (Écran et iPad) avec l'aide de Socket.io.
@@ -64,7 +64,7 @@ Dès que l'état du jeu change, un événement socket.io est transmis à tous le
 Ce script va afficher le bon écran en fonction de l'état du jeu envoyé par le serveur et, éventuellement, demander une interaction à l'utilisateur.
 
 Dès qu'un joueur tape sur une réponse, l'iPad envoie à son tour un paquet WebSocket au serveur pour qu'il l'enregistre et change d'état.
-Le jeu continue alors jusqu'a ce que toutes les questions de tous les joueurs soient posées.
+Le jeu continue alors jusqu'à ce que toutes les questions de tous les joueurs soient posées.
 
 \begin{figure}[h]
     \centering
@@ -74,7 +74,7 @@ Le jeu continue alors jusqu'a ce que toutes les questions de tous les joueurs so
 
 \subparagraph{TV} Coté TV, l'affichage est simple et permet d'afficher le score de l'utilisateur ainsi que de jouer la musique.
 L'écran n'étant pas tactile, il ne permet que l'affichage d'informations sur l'état du jeu, mais aucune interactivité n'est possible directement.
-Le client TV est une fenêtre de l'application Electron qui se connecte au serveur express pour y charger l'interface.
+Le client TV est une fenêtre de l'application Electron qui se connecte au serveur express pour charger l'interface.
 
 \subparagraph{iPad} Coté iPad, une application de kiosque permet d'afficher une page Web sans autre élément d'interface.
 Cette page Web est chargée depuis le serveur et propose des choix à l'utilisateur en fonction de l'état du jeu.
@@ -103,7 +103,7 @@ Cette borne WiFi fait office de routeur vers l'extérieur, mais aussi de serveur
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.4]{img/accorhotel-blindtest-resize.jpg}
-    \caption{Installation du Blind test au AccorHotel Arena}
+    \caption{Installation du Blind test au \aha}
 \end{figure}
 
 \subsubsection{Conclusion}

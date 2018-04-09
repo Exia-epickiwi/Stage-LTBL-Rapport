@@ -34,22 +34,13 @@ J'ai donc choisi cette distribution ayant pour objectif d'installer un environne
 
 \subsection{Environnement de kiosque}
 
-Pour mettre en place l'environnement d'affichage, j'ai commencé par installer le serveur X .
-Le serveur X est le logiciel en charge d'afficher l'interface à l'utilisateur au travers d'un protocole spécifique.
+Pour mettre en place l'environnement d'affichage, plusieurs applications sont nécéssaires :
 
-Après avoir installé ce logiciel, il faut installer un système de gestion de fenêtres qui sera en charge d'afficher les différentes fenêtres à la bonne taille et dans le bon contexte.
-Pour le gestionnaire de fenêtres, j'ai choisi xfce, car il est léger et propose beaucoup de fonctionnalités.
-Le gestionnaire de fenêtre est essentiel, car il permet aux applications de correctement se dimensionner et de passer en plein écran pour empêcher l'utilisateur d'effectuer des actions non désirées.
-
-Enfin, on peut installer notre application et la démarrer.
-
-Il faut bien sûr automatiser tout cela pour que l'ensemble puisse se démarrer automatiquement en même temps que la machine pour éviter toute action manuelle de l'installateur.
-Pour ce faire j'ai été amené à modifier le pipeline de démarrage du système.
-Tout d'abord, il faut créer un nouvel utilisateur qui sera en charge d'exécuter l'application pour éviter qu'elle ne soit exécutée en tant qu'administrateur.
-Ensuite, il faut modifier le comportement de connexion sur la première console pour qu'elle se connecte automatiquement avec l'utilisateur en charge de l'exécution du programme.
-L'utilisateur connecté, on exécute le script de démarrage qui se charge de démarrer le serveur X, le gestionnaire de fenêtres et l'application.
-
-Nous disposons alors d'un système de kiosque fonctionnel et sécurisé.
+\begin{description}
+    \item[Le serveur X] Incontournable dans l'affichage graphique, le serveur X utilise un protocole spécifique permettant un affichage graphique
+    \item[Un gestionnaire de fenêtres] Pour organiser les fenêres, les dimentionner et les mettre en plein écran pour eviter que l'utilisateur ne puisse sortir de l'application principale
+    \item[L'application] L'application en elle même démarrée automatiquement avec le système et un utilisateur spécifique
+\end{description}
 
 \subsection{Système de mise à jour}
 
@@ -66,7 +57,7 @@ Ce système permet de gérer la connexion, la déconnexion et le montage des él
 En ajoutant des règles dans le fichier de configuration spécifique de udev, on peut exécuter une commande lors de la connexion ou la déconnexion d'un périphérique amovible.
 J'ai utilisé cette fonctionnalité pour vérifier si le support contient une mise à jour et lancer l'installation de la mise à jour dans ce cas.
 
-\paragraph{Fichier de verrouillage} Lors d'une mise à jour, le script installant cette mise à jour créer un fichier \texttt{update.lock} à la racine de l'application permettant d'indiquer que'une mise à jour est en cours.
+\paragraph{Fichier de verrouillage} Lors d'une mise à jour, le script installant cette mise à jour crée un fichier \texttt{update.lock} à la racine de l'application permettant d'indiquer qu'une mise à jour est en cours.
 Il arrête alors de force l'application en cours d'exécution pour l'installation de la mise à jour.
 On ajoutera alors au fichier \texttt{update.lock} les logs de toute la mise à jour pour suivre en temps réel son déroulement.
 
@@ -76,9 +67,9 @@ Chacune de ces actions dispose de ses paramètres.
 
 \medskip
 
-Chque mise à jour de l'application passe donc par un support amovible ce qui permet à n'importe quelle personne de l'effectuer.
+Chaque mise à jour de l'application passe donc par un support amovible ce qui permet à n'importe quelle personne de l'effectuer.
 Ce support amovible contient un fichier \texttt{update.conf}, un fichier texte décrivant pas à pas la procédure à adopter.
-Seules les actions disponibles sur la machine peuvent être exécutés, la procédure n'est donc pas composée de commandes bash mais de noms de scripts présents dans le fichier \texttt{update}.
+Seules les actions disponibles sur la machine peuvent être exécutées, la procédure n'est donc pas composée de commandes bash mais de noms de scripts présents dans le fichier \texttt{update}.
 Chaque mise à jour est aussi associée à un numéro de version présent dans le fichier \texttt{update.version}.
 Ce fichier est vérifié et sera copié à la fin de la mise à jour à la racine de l'application pour ne pas faire deux fois les mêmes opérations.
 
@@ -111,6 +102,6 @@ Il est alors aisé d'administrer un ensemble de machines en même temps.
 
 \subsection{Conclusion}
 
-Ce projet fut intéressant, car il m'a permis de me plonger plus en profondeur sur les composants d'un système Linux pour contrôler son fonctionnement.
+Ce projet m'a permis de me plonger plus en profondeur sur les composants d'un système Linux pour contrôler son fonctionnement.
 Malgré la grande partie de recherche pour dégager la meilleure solution, j'ai quand même eu l'occasion de travailler sur un système de mise à jour innovant.
 Le projet est à présent terminé et les bornes ont été disposées dans les magasins vendant la technologie Somfy.

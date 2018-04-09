@@ -53,7 +53,6 @@ De plus, les données sont directement intégrées dans le code et il serait chr
 J'ai donc décidé de reprendre l'application depuis le début et de choisir une solution technique qui me semble plus adaptée à une interface.
 
 Pour ce projet, j'ai utilisé \emph{Electron} qui permet de créer des interfaces facilement à l'aide des technologies Web.
-Je m'y penche plus en détail dans la partie suivante.
 
 Pour le stockage des données, j'ai opté pour une base de données \emph{SQLite} permettant un stockage dans un fichier sans serveur superflu.
 En effet, SQLite est une librairie C mettant à disposition un langage SQL et un stockage de données dans un fichier.
@@ -85,35 +84,35 @@ Ainsi, on peut estimer que recoder l'application avec un nouveau design et les n
 \subsubsection{WebComponents}
 \label{webcomponents}
 
-Le système de WebComponents est un ensemble de nouvelles normes mises en place il y a peu de temps par le W3C et implémentés dans Chromium permettant de créer de nouveaux tags HTML avec des fonctionnalités spécifiques et isolées du reste de l'architecture de la page.
+Le système de WebComponents est un ensemble de nouvelles normes mises en place il y a peu de temps par le W3C et implémentées dans Chromium permettant de créer de nouveaux tags HTML avec des fonctionnalités spécifiques et isolées du reste de l'architecture de la page.
 
-\bigskip
+\clearpage
 
-Un WebComponents est basé sur 4 normes :
+Un WebComponent est basé sur 4 normes :
 
 \paragraph{Custom Elements} Une fonctionnalité permettant de créer un tag HTML personnalisé et reconnu par le navigateur comme faisant référence au code associé sous forme de classe.
 
 \paragraph{HTML Template} Le tag \texttt{<template>} permet de créer un élément qui ne sera pas visible par l'utilisateur, mais qui servira de squelette pour la création de futurs éléments.
-Dans les WebComponents, on les utilise pour créer le squelette de base de notre component.
+Dans les WebComponents, on les utilise pour créer le squelette de base de notre \component.
 
 \paragraph{Shadow DOM} Un concept permettant d'isoler une partie de l'arborescence d'une page Web.
 Cela implique l'isolation du style et des éléments.
-Cette technologie sert à créer le contenu caché de notre futur élément qui apparaîtra comme une blackbox.
+Cette technologie sert à créer le contenu caché de notre futur élément qui apparaîtra comme une blackbox\footnote{Une blackbox est un concept dans lequel on cache le fonctionnement interne d'un élément pour ne mettre à disposition du développeur uniquement la partie haut niveau.}.
 
 \paragraph{HTML Import} Permet d'importer un fichier HTML externe.
-Cela permet notamment d'inclure tout le code HTML, CSS et JS d'un component dans un même fichier HTML.
-Il suffira ensuite d'importer cet unique fichier pour pouvoir utiliser le component.
+Cela permet notamment d'inclure tout le code HTML, CSS et JS d'un \component dans un même fichier HTML .
+Il suffira ensuite d'importer cet unique fichier pour pouvoir utiliser le \component.
 
 \bigskip
 
 Le développement en WebComponents présente de nombreux avantages.
 L'isolation du style CSS dans le Shadow DOM permet de ne pas provoquer de conflit CSS lors d'une sélection un peu trop générale sur le fichier de styles de base.
-L'isolation du JavaScript permet de se concentrer uniquement sur le composant sans interférer avec le reste de l'application.
+L'isolation du JavaScript permet de se concentrer uniquement sur le \component interférer avec le reste de l'application.
 Enfin, l'approche unitaire des WebComponents permet une réusablitié importante.
 
-Mais l'approche par component pose aussi des difficultés.
+Mais l'approche par \component pose aussi des difficultés.
 En effet, il faut penser le composent en tant qu'élément générique.
-Si on fait un component trop spécifique ou dépendant de ses voisins, il sera difficile de réutiliser le composant dans un autre contexte de celui pour lequel il était prévu au début.
+Si on fait un \component trop spécifique ou dépendant de ses voisins, il sera difficile de réutiliser le \component dans un autre contexte de celui pour lequel il était prévu au début.
 Cela implique de réfléchir à la structure de l'application en amont.
 Et il ne faut plus penser l'application dans son ensemble, mais comme une ensemble de blocs réutilisables ajoutés les uns aux autres.
 
@@ -168,7 +167,7 @@ Mais la grande flexibilité du système m'a permis de continuer à développer s
 J'ai donc mis en place les entités suivantes
 
 \paragraph{Produit} L'entité représentant un produit de Biomérieux.
-Il contient un \emph{nom}, une \emph{description} en texte riche\footnote{Un texte riche est un ou plusieurs paragraphes formatés suivant une certaine syntaxe; on peut donc y ajouter des passages en gras, italique, insérés des images et des listes}, une \emph{image} uplodée, d'un \emph{identifiant de lampe} permettant d'envoyer des commandes OSC\footnote{Le protocole OSC (Open Sound Control) permet d'envoyer des commandes dans des paquets UDP au travers du réseau; il est très utilisé dans la scénographie pour faire communiquer les différents éléments de l'espace comme des lampes, des moteurs, etc.} Et d'une image de présentation.
+Il contient un \emph{nom}, une \emph{description} en texte riche\footnote{Un texte riche est un ou plusieurs paragraphes formatés suivant une certaine syntaxe; on peut donc y ajouter des passages en gras, italique, insérés des images et des listes}, une \emph{image} uploadée, d'un \emph{identifiant de lampe} permettant d'envoyer des commandes OSC\footnote{Le protocole OSC (Open Sound Control) permet d'envoyer des commandes dans des paquets UDP au travers du réseau; il est très utilisé dans la scénographie pour faire communiquer les différents éléments de l'espace comme des lampes, des moteurs, etc.} Et d'une image de présentation.
 
 \paragraph{Technology} Une technologie de produit, permettant de classifier les produits.
 Un même produit est associé à une seule technologie.
@@ -247,17 +246,17 @@ J'ai pu y découvrir le nouveau bâtiment de l'entreprise et son showroom très 
 Le dispositif est disposé sur une vitre opacifiante et le dispositif de pointage (autrefois un lidar) est remplacé par une caméra infrarouge et un stylo spécifique.
 Ce système permet une précision de pointage plus importante et un système plus discret.
 
-Malheureusement, en raison d'un problème touchant l'ensemble du showroom, je n'ai pas eu l'occasion de tester l'application condition réelle.
-Mai j'ai tout de même pu soumettre mon application a l'utilisateur final qui semble intéressé par les nouvelles fonctionnalités.
+Malheureusement, en raison d'un problème touchant l'ensemble du showroom, je n'ai pas eu l'occasion de tester l'application en condition réelle.
+Mai j'ai tout de même pu soumettre mon application à l'utilisateur final qui semble intéressé par les nouvelles fonctionnalités.
 
-Une nouvelle installation est planifiée pour le 12 avril pour installer mon application dans le showroom et démarrer les premiers tests en conditions réels.
+Une nouvelle installation est planifiée pour le 12 avril pour installer mon application dans le showroom et démarrer les premiers tests en conditions réelles.
 
 \subsection{Conclusion}
 \label{bmxconclusion}
 
-Ce projet fut le premier au sein de l'entreprise LTBL.
-J'ai eu l'occasion de ma familiarisé avec les services, l'équipe de développement et de design et de découvrir les technologies utilisées en interne.
+Ce projet fut le premier au sein de l'entreprise LTBL .
+J'ai eu l'occasion de ma familiariser avec les services, l'équipe de développement et de design et de découvrir les technologies utilisées en interne.
 
-Ce projet fut mon premier projet utilisant les WebComponents et il m'a donné envie de creuser dans cette direction tant le sujet est vaste et intéressant.
+Ce projet fut mon premier projet utilisant les WebComponents, une technologie très utilisée chez LTBL.
 En revanche, je me rends compte en fin de stage que j'ai fait des erreurs de structure dans mon découpage.
 Ces erreurs ne peuvent malheureusement pas être corrigées dans le peu de temps qu'il me reste pour finir mon stage, mais me permettent de constater mon avancée dans cette nouvelle technologie.
