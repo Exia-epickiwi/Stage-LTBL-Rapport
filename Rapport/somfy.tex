@@ -2,7 +2,7 @@
 
 \subsection{Somfy}
 
-Somfy est une entreprise concevant des systèmes domotiques à l'attention du grand public.
+Somfy est une entreprise concevant des systèmes domotique à l'attention du grand public.
 Dans une démarche de communication, Somfy a contacté LTBL pour la création de 11 bornes interactives qui seront mises en place dans les magasins vendant les produits de la marque.
 
 \subsection{Besoins}
@@ -24,7 +24,7 @@ Pour le système, je me suis dirigé vers un membre de la famille Ubuntu pour sa
 J'ai alors découvert Ubuntu Core qui permet la création de systèmes embarqués et minimalistes.
 Ubuntu Core est une variante d’ Ubuntu se basant sur des paquets unitaires séparés les uns des autres.
 Cela permet de séparer chaque application et d'autoriser leur communication sur certains canaux particuliers appelés interfaces.
-Ce système rappelle beaucoup les systèmes mobiles comme Android ou IOS exigeant des permissions définies à l'avance pour que les applications aient accès à certaines fonctionnalités.
+Ce système rappelle beaucoup les systèmes mobiles comme Android ou iOS exigeant des permissions définies à l'avance pour que les applications aient accès à certaines fonctionnalités.
 Ubuntu Core utilise Snapcraft, un gestionnaire de paquet permettant cette séparation des applications.
 De par sa complexité et de l'absence de serveur X sur SnapCraft, je n'ai pas retenu cette solution et me suis penché sur Ubuntu Server.
 
@@ -38,7 +38,7 @@ Pour mettre en place l'environnement d'affichage, plusieurs applications sont n�
 
 \begin{description}
     \item[Le serveur X] Incontournable dans l'affichage graphique, le serveur X utilise un protocole spécifique permettant un affichage graphique
-    \item[Un gestionnaire de fenêtres] Pour organiser les fenêres, les dimentionner et les mettre en plein écran pour eviter que l'utilisateur ne puisse sortir de l'application principale
+    \item[Un gestionnaire de fenêtres] Pour organiser les fenêtres, les dimensionner et les mettre en plein écran pour eviter que l'utilisateur ne puisse sortir de l'application principale
     \item[L'application] L'application en elle même démarrée automatiquement avec le système et un utilisateur spécifique
 \end{description}
 
@@ -50,7 +50,9 @@ Il fallait donc trouver une solution permettant de changer les fichiers de l'app
 
 Pour ce système, j'ai choisi d'utiliser un ensemble de scripts bash permettant d'avoir un grand contrôle sur le système avec un système de scripting simple et rapide.
 
-Le système de mise à jour que j'ai mise en place se compose de 3 éléments clés
+\clearpage
+
+Le système de mise à jour que j'ai mise en place se compose de trois éléments clés :
 
 \paragraph{Watching USB} Linux dispose d'un système de gestion des périphériques appelé \texttt{udev}.
 Ce système permet de gérer la connexion, la déconnexion et le montage des éléments amovibles du système.
@@ -75,7 +77,7 @@ Ce fichier est vérifié et sera copié à la fin de la mise à jour à la racin
 
 \subsection{Materiel \& Installation}
 
-Les machines en charge d'héberger l'application sont des NUC d'Intel.
+Les machines en charge d'héberger l'application sont des NUCs d'Intel.
 Les NUC sont des mini machines crées par Intel et disposant d'un processeur directement soudé sur la carte mère.
 Ces machines ont l'avantage d'être très compactes.
 

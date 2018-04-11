@@ -10,7 +10,7 @@
 
 Dans le trio d'applications de la nouvelle salle cockpit d'Eiffage, l'application d'édition de plan m'a été accordée en partie.
 L'objectif de cette application est d'afficher et de permettre la manipulation de plans (au format PDF) issus de  l'espace réseau d'Eiffage.
-Cette application est affichée sur un écran intégré dans une table faite sur mesures permettant l'interaction de plusieurs personnes au même moment.
+Cette application est affichée sur un écran intégré dans une table faite sur mesure permettant l'interaction de plusieurs personnes au même moment.
 
 Le cahier des charges de cette application est le suivant :
 \begin{itemize}
@@ -24,10 +24,10 @@ Le cahier des charges de cette application est le suivant :
 \label{eiffageTablePlanApplicationExistante}
 
 Cette application était la plus avancée des trois lors du début du projet.
-L'équipe précédente avait beaucoup travaillé sur l'affichage des PDF .
+L'équipe précédente avait beaucoup travaillé sur l'affichage des PDFs .
 
-En effet, les PDF d’ Eiffage sont très lourds et demandent un affichage particulier.
-L'équipe ayant travaillé sur ce projet a donc beaucoup réfléchi à la technologie à utiliser pour afficher les PDF sans ralentissement.
+En effet, les PDFs d’ Eiffage sont très lourds et demandent un affichage particulier.
+L'équipe ayant travaillé sur ce projet a donc beaucoup réfléchi à la technologie à utiliser pour afficher les PDFs sans ralentissement.
 Ils ont donc opté pour une approche orientée Web avec un chargement, non pas du PDF en lui même, mais d'une image de ce PDF rendue à l'aide de ImageMagick.
 Ils ont alors utilisé PixiJs, une librairie 2D pour WebGL, pour afficher l'image du PDF et permettre l'annotation.
 
@@ -35,7 +35,7 @@ Le plus gros de l'application, l'édition de plan était déjà codée et j'ai d
 Mais aussi que l'application soit utilisable en collaboration et donc autour d'une table.
 
 En revanche, l'ancienne application n'utilisait pas les WebComponents et j'ai dû m'adapter pour reformer le code présent.
-De plus, le développeur me précédent, n'avait pas du tout les mêmes habitudes de développement et la même structure que moi et j'ai donc eu une longue phase d'analyse pour comprendre le rôle de chaque élément.
+De plus, le développeur précédent, n'avait pas du tout les mêmes habitudes de développement et la même structure que moi et j'ai donc eu une longue phase d'analyse pour comprendre le rôle de chaque élément.
 
 \subsection{Technologie}
 \label{eiffageTablePlanTechnologie}
@@ -54,7 +54,7 @@ L'application se divise alors en de multiples WebComponents chacun ayant un rôl
     \caption{Structure de l'application Table Plan}
 \end{figure}
 
-On retrouve alors les composants suivants
+On retrouve alors les composants suivants :
 
 \paragraph{Blueprint player} Un component en charge d'afficher et d'annoter un plan dans notre cas.
 Ce component était déjà, en grande partie, conçu quand j'ai débuté le développement de l'interface.
@@ -62,12 +62,12 @@ Anisi, je n'ai eu qu'à l'intégrer dans l'application finale.
 
 \paragraph{Tab menu} Le menu composé de différents onglets.
 Chaque onglet représente un plan ouvert qui peut être affiché.
-Ce component est présent en 2 exemplaires dont un retourné sur le haut de l'application destiné aux utilisateurs présents de l'autre côté de la table.
+Ce component est présent en deux exemplaires dont un retourné sur le haut de l'application destiné aux utilisateurs présents de l'autre côté de la table.
 J'ai synchronisé l'état de ces deux components avec un système de Store (\emph{cf} partie\ref{eiffageTablePlanStores})
 
-\paragraph{Toolbar} Un composant affichant divers boutons permettant de choisir l'outil à utiliser dans sur le plan affiché.
-Ce component est présent en 4 exemplaires dans l'application et doit donc être synchronisé avec ses voisins.
-J'ai aussi utilisé le système de store pour synchroniser les états des barres d'outils et des éditeurs de plans (\texttt{Blueprint Player}).
+\paragraph{Toolbar} Un composant affichant divers boutons permettant de choisir l'outil à utiliser sur le plan affiché.
+Ce component est présent en quatre exemplaires dans l'application et doit donc être synchronisé avec ses voisins.
+J'ai aussi utilisé le système de Store pour synchroniser les états des barres d'outils et des éditeurs de plans (\texttt{Blueprint Player}).
 
 \bigskip
 
@@ -81,8 +81,8 @@ L'un des points majeurs de cette mission fut le style de l'application.
 En effet, on est loin d'une application standard exécutée sur un bureau.
 On remarque que l'utilisation faite de cette application nécessite une mise en place particulière des éléments de l'interface.
 
-On remarque notamment que les barres d'outils sont présentes aux 4 coins de l'interface toutes dirigés vers l'extérieur de l'application pour permettre an'importe quel collaborateur autour de la table d'interagir avec les plans.
-Cela a demandé la mise en place d'une synchronisation des barres d'outils au niveau de l'application et l'utilisation de propriétés CSS de transformations a des fins bien plus ergonomiques qu'esthétiques.
+On remarque notamment que les barres d'outils sont présentes aux quatre coins de l'interface toutes dirigés vers l'extérieur de l'application pour permettre à n'importe quel collaborateur autour de la table d'interagir avec les plans.
+Cela a demandé la mise en place d'une synchronisation des barres d'outils au niveau de l'application et l'utilisation de propriétés CSS de transformation.
 
 \bigskip
 
@@ -90,14 +90,14 @@ On remarque aussi que la barre des onglets ouverts est aussi inversée sur la pa
 Cela a demandé une modification au niveau du code lui-même, car je ne pouvais pas me contenter d'effectuer un miroir sur l'élément (ce que j'ai fait pour les barres d'outils).
 La raison de cette spécificité est la présence de texte.
 Mettre un effet de miroir sur un texte le rend complètement illisible (contrairement à une icône) et j'ai effectué une rotation au lieu de faire un miroir.
-Mais cela posé d'autres problèmes puisque la droite et la gauche était inverse sur chacun des éléments.
+Mais cela posait d'autres problèmes puisque la droite et la gauche était inversés sur chacun des éléments.
 J'ai donc modifié le code source du composant de la barre d'onglets pour qu'elle inverse toutes les commandes dans certains cas.
 
 \subsection{Stockage de données}
 \label{eiffageTablePlanStores}
 
 Par son style particulier et la dimension collaborative de la table, de nombreux éléments de l'interface doivent être synchronisés.
-Par exemple, il faut synchroniser l'état des barres tout'ils pour qu'elles affichent en tout temps le bon outil en cours d'utilisation même si cet outil est changé depuis un élément extérieur comme une autre barre d'outils.
+Par exemple, il faut synchroniser l'état des barres d'outils pour qu'elles affichent en tout temps le bon outil en cours d'utilisation même si cet outil est changé depuis un élément extérieur comme une autre barre d'outils.
 
 J'ai, dans un premier temps, imaginé un système inclus dans les components permettant de les lier directement pour qu'ils s'informent entre eux lors d'un changement d'état d'un côté.
 
@@ -125,21 +125,19 @@ Ces changements seront alors répercutés sur l'ensemble de l'application automa
 J'ai alors réutilisé ce système dans la gestion des plans ouverts et en cours de conversion (\emph{cf} partie \ref{eiffageTablePlanConversion}) sur Tableplan.
 Mais aussi dans les autres applications que j'ai été amené à développer à la suite de celle-ci.
 
-\clearpage
-
 \subsection{Conversion}
 \label{eiffageTablePlanConversion}
 
 Les plans d'Eiffage étant très lourds, ils sont impossibles à ouvrir tel quel dans l'application.
-Il faut donc utiliser un logiciel de conversion pour rendre les PDF sous forme d'image.
+Il faut donc utiliser un logiciel de conversion pour rendre les PDFs sous forme d'images.
 
-Les PDF de plans d'Eiffage étant des plans vectoriels\footnote{Une image vectorielle est une image dont on ne spécifie pas la couleur de chaque pixel, mais on spécifie une suite d'instruction permettant de calculer l'image finale. Les fichiers PDF, AI et SVG sont des exemples de fichiers vectoriels} Ils nécessitent un calcul préalable pour les afficher.
+Les PDFs de plans d'Eiffage étant des plans vectoriels\footnote{Une image vectorielle est une image dont on ne spécifie pas la couleur de chaque pixel, mais on spécifie une suite d'instruction permettant de calculer l'image finale. Les fichiers PDF, AI et SVG sont des exemples de fichiers vectoriels}, ils nécessitent un calcul préalable pour les afficher.
 Pour résoudre le problème de lourdeur des fichiers, j'ai mis en place un système de conversion automatique des plans.
 
 \bigskip
 
 Dès qu'un fichier PDF est ouvert, on vérifie dans un dossier de cache s'il n'est pas déjà converti.
-S’ il l'est, on ouvre simplement la conversion précédente.
+S'il l'est, on ouvre simplement la conversion précédente.
 S'il ne l'est pas, on lance une conversion.
 On informa alors l'utilisateur de la conversion en cours et on attend la fin de cette conversion avant d'ouvrir le fichier converti.
 
@@ -148,7 +146,7 @@ On informa alors l'utilisateur de la conversion en cours et on attend la fin de 
     \includegraphics[scale=0.3]{img/image-magick.png}
     \hspace{5cm}
     \includegraphics[scale=0.13]{img/ghostscript.png}
-    \caption{Les logis de ImageMagick (à gauche) et GhostScript (à droite)}
+    \caption{Les logos de ImageMagick (à gauche) et GhostScript (à droite)}
 \end{figure}
 
 La conversion est effectuée avec ImageMagick, un logiciel de manipulation d'images très performant, et de GhostScript, un logiciel permettant de rendre des fichiers PDF avec ImageMagick.

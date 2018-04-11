@@ -37,6 +37,8 @@ De plus, pour pouvoir gérer par eux même les produits présents dans l'applica
 
 Enfin, dans une optique de recherche et développement d'une solution universelle de back-office chez LTBL il fallait aussi réfléchir à un système flexible de stockage de données.
 
+\clearpage
+
 Pour résumer, les fonctionnalités demandées sont :
 
 \begin{itemize}
@@ -48,7 +50,7 @@ Pour résumer, les fonctionnalités demandées sont :
 
 \subsection{Conception de la solution}
 
-Le code précédent étant totalement fait main, il est peu flexible et sensible aux bugs de développement.
+Le code précédent étant produit en C++, il est peu adaptable au redesign et à l'implémentation d'un backoffice utilisable par le client.
 De plus, les données sont directement intégrées dans le code et il serait chronophage et peu rentable de modifier cette application pour qu'elle s'adapte aux nouveaux besoins.
 J'ai donc décidé de reprendre l'application depuis le début et de choisir une solution technique qui me semble plus adaptée à une interface.
 
@@ -106,15 +108,15 @@ Il suffira ensuite d'importer cet unique fichier pour pouvoir utiliser le \compo
 \bigskip
 
 Le développement en WebComponents présente de nombreux avantages.
-L'isolation du style CSS dans le Shadow DOM permet de ne pas provoquer de conflit CSS lors d'une sélection un peu trop générale sur le fichier de styles de base.
+L'isolation du style CSS dans le Shadow DOM permet de ne pas provoquer de conflit CSS lors d'une sélection un peu trop générale sur le fichier de style de base.
 L'isolation du JavaScript permet de se concentrer uniquement sur le \component interférer avec le reste de l'application.
-Enfin, l'approche unitaire des WebComponents permet une réusablitié importante.
+Enfin, l'approche unitaire des WebComponents permet une réusabilitié importante.
 
 Mais l'approche par \component pose aussi des difficultés.
-En effet, il faut penser le composent en tant qu'élément générique.
-Si on fait un \component trop spécifique ou dépendant de ses voisins, il sera difficile de réutiliser le \component dans un autre contexte de celui pour lequel il était prévu au début.
+En effet, il faut penser le \component en tant qu'élément générique.
+Si on fait un \component trop spécifique ou dépendant de ses voisins, il sera difficile de réutiliser le \component dans un autre contexte que celui pour lequel il était prévu au début.
 Cela implique de réfléchir à la structure de l'application en amont.
-Et il ne faut plus penser l'application dans son ensemble, mais comme une ensemble de blocs réutilisables ajoutés les uns aux autres.
+Et il ne faut plus penser l'application dans son ensemble, mais comme un ensemble de blocs réutilisables ajoutés les uns aux autres.
 
 Faire un bloc réutilisable passe par l'utilisation des attributs HTML comme vecteurs de transmission d'informations.
 Mais aussi l'utilisation d'événements JavaScript comme vecteur de signal pour avertir les parents.
@@ -148,7 +150,7 @@ L'objectif de cette structure est d'être le plus flexible possible pour pouvoir
 
 \bigskip
 
-Dans le cas de cette application pour BioMérieux, j'ai décidé de découper les données en 5 entités.
+Dans le cas de cette application pour BioMérieux, j'ai décidé de découper les données en cinq entités.
 Ces entités représentent une table dans la base de données et permettent de faire le lien entre cette table et le code de l'application.
 Pour construire ce modèle de données, je me suis basé sur les designs de l'application faits par le graphiste et des informations données par mon maître de stage.
 L'une des difficultés ici fut de ne pas avoir de cahier des charges défini, ce qui m’a obligé à reprendre mon modèle plusieurs fois.
@@ -159,7 +161,7 @@ Mais la grande flexibilité du système m'a permis de continuer à développer s
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.6]{img/uml-bmx-solution.png}
-    \caption{Le diagramme UML du modèle de données de l'application BioMérieux Solution}
+    \caption{Le diagramme UML du modèle de données de l'application BioMérieux Solutions}
 \end{figure}
 
 \clearpage
@@ -180,7 +182,7 @@ Une thématique possède un \emph{nom} et une \emph{tagline} représentant le sl
 Chaque thématique peut contenir plusieurs produits et un même produit peut se retrouver dans plusieurs catégories.
 
 \paragraph{SuperThematic} Une thématique contenant plusieurs sous-thématiques.
-J'ai choisi de créer une super thématique au lieu de faire une arborescence de thématique, car le client ne dit pas vouloir une arborescence plus grande que 2 niveaux.
+J'ai choisi de créer une super thématique au lieu de faire une arborescence de thématique, car le client ne dit pas vouloir une arborescence plus grande que deux niveaux.
 Mais aussi qu'il ne faut pas pouvoir ajouter des produits dans les super thématiques.
 Une super thématique ne contient qu'un \emph{nom} tout comme les thématiques, mais peut contenir plusieurs thématiques.
 
@@ -205,7 +207,7 @@ Pour ce back-office j'ai utilisé \emph{Express} une librairie permettant de cr�
 \bigskip
 
 Avec le recul de mon stage, je me rends compte que le développement d'une application compagnon aurait été plus intéressant pour éviter qu'un pirate ayant accès au réseau de l'application puisse librement en modifier le contenu.
-De plus, cela aurait permis d'améliorer les performances en évitant de démarre un serveur web à chaque utilisation de l'interface client.
+De plus, cela aurait permis d'améliorer les performances en évitant de démarrer un serveur web à chaque utilisation de l'interface client.
 
 Mais, l'approche que j'ai utilisée permet une plus grande simplicité d'opération par la mise à jour en direct de la vue client et l'absence de fichier à transférer.
 

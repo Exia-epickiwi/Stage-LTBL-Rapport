@@ -5,18 +5,18 @@
 \ah est le premier gérant d'hôtel de France et le 6e mondial.
 À l'occasion d'un partenariat, le Palais omnisports de Paris-Bercy s'est vu renommé \aha pour 10 ans.
 
-Le site accueillant beaucoup de concerts et de spectateurs, Accorshotel a voulu communiquer au travers d'une installation interactive.
-Cette installation est un blind test composé d'un écran et d'un iPad permettant de saisir les réponses.
+Le site accueillant beaucoup de concerts et de spectateurs, \ah a voulu communiquer au travers d'une installation interactive.
+Cette installation est un quizz musical (ou \emph{Blind test}) composé d'un écran et d'un iPad permettant de saisir les réponses.
 
 Le jeu est simple : une chanson est jouée sur l'écran et le titre de cette chanson est indiqué.
-Le joueur dispose alors de 45 secondes pour trouver l'artiste en question parmi les 4 proposé.
-On enchaîne ainsi sur 6 questions qui se terminent sur le résultat du jeu affiché à l'utilisateur.
+Le joueur dispose alors de 45 secondes pour trouver l'artiste en question parmi les quatre proposés.
+On enchaîne ainsi sur six questions qui se terminent sur le résultat du jeu affiché à l'utilisateur.
 
 \subsection{Technologies}
 
 Les technologies utilisées dans ce projet sont standards et étaient déjà maîtrisées par les membres de l'équipe.
 On retrouve alors une application \emph{Electron} pour l'affichage sur l'écran et un serveur NodeJS avec le framework \emph{Express} pour servir les fichiers et gérer le jeu.
-Enfin, on utilise \emph{Socket.io} pour les WebSocket apportant de l'interactivité.
+Enfin, on utilise \emph{Socket.io} pour les WebSockets apportant de l'interactivité.
 
 \subsubsection{Express}
 
@@ -32,13 +32,13 @@ Le reste des interactions s'effectuent au travers des Websockets.
 \subsubsection{WebSockets}
 
 La technologie de Websocket est un protocole Web de connexion bidirectionnel.
-Ils permettent au serveur et au client de conserver une connexion TCP bidirectionnelle.
+Il permet au serveur et au client de conserver une connexion TCP bidirectionnelle.
 
 Ainsi il est possible au client d'envoyer des paquets arbitraires au serveur, mais aussi au serveur d'envoyer des paquets au client à n'importe quel moment.
 Ainsi, il est possible de rendre l'application très interactive et dynamique.
 
 Nous avons utilisé les WebSockets pour toute la communication entre le serveur et les clients (Écran et iPad) avec l'aide de Socket.io.
-Cette librairie se place comme une surcouche aux websocket et reprend l'aspect événementiel de Nodejs.
+Cette librairie se place comme une surcouche aux websockets et reprend le principe d'événements de Nodejs.
 En effet, elle met à disposition du développeur un objet \texttt{socket} agissant comme un émetteur et un récepteur d'événements.
 Chaque événement est composé d'un nom et d'un objet de contexte.
 Lors de l'émission, l'objet \texttt{socket} transmet l'événement et le contexte au client connecté.
@@ -46,7 +46,7 @@ Il est aussi possible de recevoir des événements et ainsi de communiquer de ma
 
 \subsection{Structure}
 
-Le Blind Test se compose de 3 éléments.
+Le Blind Test se compose de trois éléments :
 
 \paragraph{Le serveur Web} présent dans le processus principal de l'application Electron, il gère tout le jeu du début à la fin.
 Il présente un serveur de fichiers permettant l'accès aux fichiers audio, aux fichiers d'image et aux pages Web depuis l'iPad et l'affichage.
@@ -74,11 +74,11 @@ Le jeu continue alors jusqu'à ce que toutes les questions de tous les joueurs s
 
 \subparagraph{TV} Coté TV, l'affichage est simple et permet d'afficher le score de l'utilisateur ainsi que de jouer la musique.
 L'écran n'étant pas tactile, il ne permet que l'affichage d'informations sur l'état du jeu, mais aucune interactivité n'est possible directement.
-Le client TV est une fenêtre de l'application Electron qui se connecte au serveur express pour charger l'interface.
+Le client TV est une fenêtre de l'application Electron qui se connecte au serveur Express pour charger l'interface.
 
 \subparagraph{iPad} Coté iPad, une application de kiosque permet d'afficher une page Web sans autre élément d'interface.
 Cette page Web est chargée depuis le serveur et propose des choix à l'utilisateur en fonction de l'état du jeu.
-Cela peut être le nombre de joueurs, le nom de l'artiste en cours de lecture ou simplement une demande pour passer à la question suivante.
+Cela peut-être le nombre de joueurs, le nom de l'artiste en cours de lecture ou simplement une demande pour passer à la question suivante.
 
 \subsubsection{Design}
 
@@ -103,7 +103,7 @@ Cette borne WiFi fait office de routeur vers l'extérieur, mais aussi de serveur
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.4]{img/accorhotel-blindtest-resize.jpg}
-    \caption{Installation du Blind test au \aha}
+    \caption{Installation du Blind test à \aha}
 \end{figure}
 
 \subsubsection{Conclusion}

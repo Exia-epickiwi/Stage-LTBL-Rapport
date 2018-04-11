@@ -7,10 +7,9 @@
     \caption{Capture d'écran de la version actuelle de Biopedia}
 \end{figure}
 
-Biopedia est un projet de longue date pour LTBL .
 L'objectif de cette application est de présenter les données d'une base de données de BioMérieux sous forme de graphe pour la présentation aux clients intéressés.
 
-Au moment où j'écris ces lignes, je sous toujours en train de développer activement cette application pour la présenter au client final le 20 avril;
+Au moment où j'écris ces lignes, je suis toujours en train de développer activement cette application pour la présenter au client final le 20 avril;
 Certaines informations pourront alors changer à l'avenir.
 
 \subsection{Application précédente}
@@ -19,7 +18,7 @@ Certaines informations pourront alors changer à l'avenir.
 Cela longtemps que LTBL à ce projet de visualisation de graphes et une première version a déjà été présentée.
 Mais cette application se basait sur une vieille librairie et de nouvelles fonctionnalités ont été demandées par le client.
 
-Apres, une étude du code de cette application nous avons décidé de revoir complètement son code.
+Apres, une étude du code de cette application nous avons décidé de le revoir complètement.
 Je me suis donc lancé sur la création d'une toute nouvelle application de visualisation.
 
 Cette application devra disposer des fonctionnalités suivantes :
@@ -29,19 +28,19 @@ Cette application devra disposer des fonctionnalités suivantes :
     \item Afficher les noms des noeuds du graphe quand on clique dessus
     \item Afficher les parents et enfants de ce noeud lors de la sélection
     \item Naviguer aisément dans les données
-    \item Afficher une potion du graphe uniquement dans le cadre d'une étude de cas
+    \item Afficher une portion du graphe uniquement dans le cadre d'une étude de cas
 \end{itemize}
 
 \subsection{Technologies}
 \label{biomerieuxBiopediaTéchnologies}
 
-Pour créer cette application, je me suis tout d'abord tourné vers Unity\footnote{Unity est un moteur de jeu permettant d'afficher dans une scène en 3D des structures associées à des matériaux.} Pour la création d'un environnement en 3 dimensions.
+Pour créer cette application, je me suis tout d'abord tourné vers Unity\footnote{Unity est un moteur de jeu permettant d'afficher dans une scène en 3D des structures associées à des matériaux.} Pour la création d'un environnement en trois dimensions.
 Unity permet d'avoir des environnements 3D très interactifs et faciles à utiliser.
 Mais j'ai aussi remarqué un manque évident de librairies permettant de créer des graphes comme dans l'ancienne version de Biopedia.
-De plus, je n'allais pas passer les 3 semaines dédié à ce projet pour la recréation d'un graphique de ce type.
+De plus, je n'allais pas passer les trois semaines dédiés à ce projet pour la recréation d'un graphique de ce type.
 
 J'ai donc décidé de retourner sur une solution Web avec Electron et les WebComponents.
-Pour ce faire, j'ai utilisé la librairie \emph{3d-force-graph} se basant sur \emph{ThreeJS} pour l'affichage en 3D dans un Cana WebGL.
+Pour ce faire, j'ai utilisé la librairie \emph{3d-force-graph} se basant sur \emph{ThreeJS} pour l'affichage en 3D dans un Canvas WebGL .
 
 \emph{ThreeJs} est la principale librairie permettant de concevoir des scènes en 3D avec WebGL .
 Elle permet de placer des primitives dans la scène 3D et de faire diverses actions comme des mouvements de caméra, l'utilisation de matériaux et la création d'animations.
@@ -69,7 +68,7 @@ Le graphe de BioMérieux dispose d'une nomenclature spécifique permettant de re
 Dans notre cas, les couleurs montrent la position des noeuds dans l'arborescence et non un type particulier.
 
 \begin{description}
-    \item[Noeud vert] Représente une faille du graphe soit un noeud qui ne dispose que de relations dans sa direction et aucune relation ne partant de ce noeud
+    \item[Noeud vert] Représente une feuille du graphe soit un noeud qui ne dispose que de relations dans sa direction et aucune relation ne partant de ce noeud
     \item[Noeud bleu] Représente un noeud intermédiaire soit un noeud disposant de relations depuis et vers lui
     \item[Noeud jaune] Représente un noeud racine soit un noeud qui ne dispose d'aucune relation dans sa direction
 \end{description}
@@ -89,7 +88,7 @@ Dans cette application, j'utilise toutes les compétences acquises durant les pr
 
 \clearpage
 
-Le différent component composant cette application sont les suivants :
+Les différents \components composant cette application sont les suivants :
 
 \paragraph{Graph view} Le lecteur de graphique permettant d'afficher un graphique des données en 3 dimensions a l'aide de \emph{ThreeJs}.
 Il est possible de cliquer sur les noeuds du graphique pour le sélectionner et afficher diverses informations dans la barre de contrôle présente sur la droite de l'interface.

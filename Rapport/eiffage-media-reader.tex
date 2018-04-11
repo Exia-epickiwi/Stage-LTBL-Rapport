@@ -19,7 +19,7 @@ Les plans étudiés sont stockés sur un serveur central et sont disponibles aux
 
 \medskip
 
-Nous avons mis en place 3 solutions pour ce chantier.
+Nous avons mis en place trois solutions pour ce chantier :
 
 La première est une table tactile sur laquelle il est possible d'ouvrir, de manipuler et d'annoter les plans depuis le serveur central.
 Cela vient remplacer les impressions successives de plans pour les annotations et les modifications.
@@ -28,13 +28,13 @@ Cela permet de réduire la consommation d'encre et de papier mais aussi de gagne
 La seconde est un écran d'affichage permettant de positionner des Post-its sur un plan.
 Ces Post-its sont associés à une personne et définissent les tâches à accomplir.
 
-La dernière solution est un explorateur de fichiers permettant d'afficher des photos, vidéos ou documents du chantier.
+La dernière solution est un explorateur de fichier permettant d'afficher des photos, vidéos ou documents du chantier.
 Cette solution a pour objectif de permettre une meilleure présentation du chantier avec des documents directement importés depuis le serveur central.
 
 \medskip
 
-Dans ce projet, j'ai notamment travaillé sur le navigateur de fichiers.
-Ce navigateur de fichiers est affiché sur un écran de 84 pouces tactile mettant à disposition des employés un formidable outil de présentation.
+Dans ce projet, j'ai notamment travaillé sur le navigateur de fichier.
+Ce navigateur de fichier est affiché sur un écran de 84 pouces tactile mettant à disposition des employés un formidable outil de présentation.
 
 \begin{figure}[h]
     \centering
@@ -43,7 +43,7 @@ Ce navigateur de fichiers est affiché sur un écran de 84 pouces tactile mettan
     \bigskip
 
     \includegraphics[scale=1.2]{img/media-reader-pres-2.jpg}
-    \caption{Un aperçu de l'explorateur de fichiers une fois installé dans la salle cockpit}
+    \caption{Un aperçu de l'explorateur de fichier une fois installé dans la salle cockpit}
 \end{figure}
 
 \clearpage
@@ -55,8 +55,9 @@ Le lecteur de Media Eiffage doit donc disposer des fonctionnalités suivantes :
 \begin{itemize}
     \item Se connecter à un emplacement réseau
     \item Lister le contenu des dossiers et pouvoir naviguer dans l'arborescence
-    \item Afficher un aperçu des fichiers images, vidéo et PDF
+    \item Afficher un aperçu des fichier images, vidéo et PDF
     \item Intégrer l'application dans un contexte Active Directory où chaque utilisateur doit pouvoir ouvrir sa session personnelle
+    \item Afficher un site internet prédéfini
 \end{itemize}
 
 La courte liste des fonctionnalités m'a permis de travailler plus en profondeur sur la structure de l'application et ainsi de développer des fonctionnalités solides.
@@ -64,7 +65,7 @@ La courte liste des fonctionnalités m'a permis de travailler plus en profondeur
 \subsection{Application existante}
 
 Dû à des retards sur la livraison du matériel requis pour développer les applications Eiffage, le développement était peu avancé.
-L'explorateur de fichiers chargeait toute l'arborescence de la source des données ce qui était peu optimisé.
+L'explorateur de fichier chargeait toute l'arborescence de la source des données ce qui était peu optimisé.
 En revanche la solution initiale contenant un navigateur de PDF que j'ai repris dans ma version de l'application.
 
 Globalement, j'ai repris une grande partie de l'application qui n'utilisait pas les WebComponents pour l'adapter aux nouvelles techniques Web permettant de modulariser chaque élément de l'interface.
@@ -95,12 +96,11 @@ Chaque component est séparé des autres et peut fonctionner seul sans nécessit
 
 \begin{description}
     \item[Source Selector] Un simple menu de sélection des sources permettant à l'utilisateur de choisir parmi plusieurs éléments disponibles chargés depuis un fichier de configuration général
-    \item[File Explorer] Le component principal de l'application, car il permet de naviguer dans les dossiers d'une source et d'ouvrir des fichiers  de cette source
+    \item[File Explorer] Le component principal de l'application, car il permet de naviguer dans les dossiers d'une source et d'ouvrir des fichier  de cette source
     \item[Folder List] Compris dans le component \textbf{File Explorer}, il va lire le contenu d'un dossier passé en attribut et en lister le contenu
-    \item[File System Element] Compris dans le component \textbf{Folder List}, ce component va chercher le fichier ou le dossier passer
-    \item en attribut et afficher son titre et son icône
+    \item[File System Element] Compris dans le component \textbf{Folder List}, ce component va chercher le fichier ou le dossier passer en attribut et afficher son titre et son icône
     \item[File Viewer] Ce component assez simple est en charge d'afficher un aperçu d'un fichier passé en attribut et de choisir le bon lecteur pour le type de fichier demandé
-    \item[PDF Player] Le lecteur de fichiers, dans ce cas PDF, permettant d'afficher correctement le fichier en fonction de son type; j’ai aussi conçu \texttt{image-player} pour les images et \texttt{video-player} pour les vidéos
+    \item[PDF Player] Le lecteur de fichier, dans ce cas PDF, permettant d'afficher correctement le fichier en fonction de son type; j’ai aussi conçu \texttt{image-player} pour les images et \texttt{video-player} pour les vidéos
     \item[Logout] Un composant conçu par un collègue permettant de se déconnecter de la session Windows actuelle
     \item[Lock Screen] Un component non affiché sur le schéma permettant d'afficher un écran de bienvenue avec un diaporama de photos provenant d'un emplacement réseau en arrière-plan; cet écran de verrouillage s'affiche après une période d'inactivité
     \item[Web Frame] Un composant permettant d'afficher une page Web avec le moteur de rendu webkit
@@ -117,8 +117,8 @@ Chaque component est séparé des autres et peut fonctionner seul sans nécessit
 
 Les animations prennent une grande place dans le design des applications de LTBL et celles-ci sont prises très au sérieux par l'équipe de développement.
 Les animations dans les technologies Web posent quand même un problème.
-Elles doivent êtres prises en compte des la création des éléments pour être correctement utilisables.
-De plus l'animation des plusieurs éléments les uns a la suite des autres est difficile en CSS.
+Elles doivent êtres prises en compte dès la création des éléments pour être correctement utilisables.
+De plus l'animation de plusieur éléments les uns a la suite des autres est difficile en CSS.
 
 J'ai donc créé un component Web en charge de gérer les animations.
 Un component comme \texttt{Animated Block} permet de ne pas penser à l'animation pendant le développement, mais de l'ajouter à la fin, dès que les fonctionnalités sont ajoutées comme une dernière finition.
@@ -138,7 +138,7 @@ Par exemple, prenons l'animation \texttt{enter}.
     \caption{Système d'animation d'\texttt{Animated Block}}
 \end{figure}
 
-Chaque animation est composée de 3 classes permettant de créer le mouvement correct
+Chaque animation est composée de 3 classes permettant de créer le mouvement correct :
 
 \begin{description}
     \item[Classe de setup] En charge de mettre en style l'élément avant l'animation (Ex. placer l'élément hors de l'écran pour le faire apparaître)
@@ -171,7 +171,7 @@ Il suffit d'appeler la fonction d'animation et d'attendre la résolution de la p
 
 Sur les 3 projets que nous avions à développer pour Eiffage, les 3 avaient besoin d'un explorateur de fichier.
 Que ce soit pour afficher des aperçus comme le projet actuel ou ouvrir un plan sur la table interactive.
-L'explorateur de fichiers est un élément essentiel de l'interface.
+L'explorateur de fichier est un élément essentiel de l'interface.
 
 Et c'est ici que l'on voit l'intérêt d'utiliser des WebComponents.
 En effet, il suffit d'utiliser exactement le même code que j'ai utilisé pour le lecteur de médias dans tous les autres projets.
@@ -189,7 +189,7 @@ Cela peut être assuré par les submodules Git.
 Pour tous les projets chez LTBL j'ai utilisé git et BitBucket pour la gestion du code source.
 Git dispose d'une fonctionnalité de Submodule.
 Cela consiste en un sous-repository dans le projet actuel.
-Ce sous-reprository fait référence à un repository en ligne commun à tous les projets.
+Ce sous-repository fait référence à un repository en ligne commun à tous les projets.
 
 Ainsi, on peut éditer le code du component partagé sur le repository qui lui est dédié puis, sur les projets en ayant besoin, récupérer les modifications avec \texttt{git pull}.
 
@@ -197,7 +197,7 @@ Ainsi, on peut éditer le code du component partagé sur le repository qui lui e
 
 Ce projet m'a amené à travailler sur une interface tactile qui allait être utilisée au quotidien et je devais porter une attention toute particulière à l'ergonomie de l'interface.
 
-J'ai alors eu de nombreuses heures d'expérimentations sur les gestes que peuvent avoir les utilisateurs sur les lecteurs comme celui des PDF .
+J'ai alors eu de nombreuses heures d'expérimentations sur les gestes que peuvent avoir les utilisateurs sur les lecteurs comme celui des PDFs .
 J'ai ainsi pu me rendre compte de la difficulté d'avoir une réaction ergonomique aux gestes tactiles comme ceux du pincement ou de la rotation à deux doigts.
 
 J'ai donc effectué beaucoup d'expériences avec de nombreux changements de paramètres pour trouver les bonnes valeurs.
@@ -214,9 +214,9 @@ J'ai alors décidé d'actualiser le zoom du PDF lors du redimensionnement de la 
 \subsection{Installation}
 
 Nous avons installé ce projet sur le site de Laborde près de la garde Saint-Lazare à Paris.
-Nous avons installé l'écran de 84 Pouces sur son pied et avons installé l'application sur l'ordinateur de manière globale sur la machine.
+Nous avons installé l'écran de 84 pouces sur son pied et avons installé l'application sur l'ordinateur de manière globale sur la machine.
 
-Un problème s'est posé quand nous avons pris connaissance des prérequis de sécurité en vogue chez Eiffage.
+Un problème s'est posé quand nous avons pris connaissance des pré-requis de sécurité en vogue chez Eiffage.
 En effet, Eiffage utilise le système Active Directory et le département Informatique de l'entreprise ne permet pas la création d'un compte spécifique pour l'exécution de l'application.
 Il fallait donc faire en sorte que l'application puisse s'exécuter sur n'importe quel utilisateur se connectant.
 J'ai alors simplement ajouté un raccourci vers l'application dans le dossier \texttt{Démarrage} du menu démarré global de l'ordinateur pour que l'application se démarre à chaque ouverture de session.
@@ -225,5 +225,5 @@ J'ai aussi ajouté un bouton de déconnexion permettant de se déconnecter de la
 \subsection{Conclusion}
 
 Ce projet m'a permis, au travers d'un sujet simple, de poursuivre ma découverte des WebComponents et des interfaces tactiles.
-J'ai rencontré des obstacles qui m'on fait prendre conscience de la difficulté de créer des interfaces tactiles de qualité et le développement de gestes tactiles qui sembles naturels.
-Malgré ces problèmes, j'ai réussi à livrer une application fonctionnelle et dont les composants peuvent aisément être intégrés dans les 2 autres projets d'Eiffage qui ont aussi besoin d'un explorateur de fichiers.
+J'ai rencontré des obstacles qui m'on fait prendre conscience de la difficulté de créer des interfaces tactiles de qualité et le développement de gestes tactiles qui semblent naturels.
+Malgré ces problèmes, j'ai réussi à livrer une application fonctionnelle et dont les composants peuvent aisément être intégrés dans les 2 autres projets d'Eiffage qui ont aussi besoin d'un explorateur de fichier.
