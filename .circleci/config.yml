@@ -1,0 +1,9 @@
+version: 2
+jobs:
+  build-report:
+    docker:
+      - image: raabf/latex-versions:texlive2018
+    steps:
+      - checkout
+      - run: cd Rapport
+      - run: pdflatex -interaction=nonstopmode rapport.tex
