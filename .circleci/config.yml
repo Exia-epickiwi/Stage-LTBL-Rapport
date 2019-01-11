@@ -11,12 +11,16 @@ jobs:
             cd Rapport;
             pdflatex -interaction=nonstopmode rapport.tex;
             mv rapport.pdf /Documents;
+      - store_artifacts:
+          path: /Documents/rapport.pdf
       - run:
           name: "Build: Rapport d'étonnement "
           command: |
             cd Rapport-d-etonnement;
             pdflatex -interaction=nonstopmode rapport-d-etonnement.tex;
             mv rapport-d-etonnement.pdf /Documents;
+      - store_artifacts:
+          path: /Documents/rapport-d-etonnement.pdf
       - run:
           name: "Build: Dossier PFI"
           command: |
@@ -24,5 +28,5 @@ jobs:
             pdflatex -interaction=nonstopmode dossier-pfi.tex;
             mv dossier-pfi.pdf /Documents;
       - store_artifacts:
-          path: /Documents
+          path: /Documents/dossier-pfi.pdf
         
