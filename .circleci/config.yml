@@ -5,5 +5,4 @@ jobs:
       - image: raabf/latex-versions:texlive2018
     steps:
       - checkout
-      - run: cd Rapport
-      - run: pdflatex -interaction=nonstopmode rapport.tex
+      - run: cd Rapport && pdflatex -interaction=nonstopmode rapport.tex
