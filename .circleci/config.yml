@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build-report:
+  build:
     docker:
       - image: raabf/latex-versions:texlive2018
     steps:
