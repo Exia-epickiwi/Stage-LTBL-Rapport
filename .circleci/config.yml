@@ -6,10 +6,24 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Build Rapport/rapport.tex"
+          name: "Build: Rapport de stage"
           command: |
             cd Rapport;
             pdflatex -interaction=nonstopmode rapport.tex;
       - store_artifacts:
           path: Rapport/rapport.pdf
+      - run:
+          name: "Build: Rapport d'étonnement "
+          command: |
+            cd Rapport-d-etonnement;
+            pdflatex -interaction=nonstopmode rapport-d-etonnement.tex;
+      - store_artifacts:
+          path: Rapport-d-etonnement/rapport-d-etonnement.pdf
+      - run:
+          name: "Build: Dossier PFI"
+          command: |
+            cd Dossier-PFI;
+            pdflatex -interaction=nonstopmode dossier-pfi.tex;
+      - store_artifacts:
+          path: Dossier-PFI/dossier-pfi.pdf
         
