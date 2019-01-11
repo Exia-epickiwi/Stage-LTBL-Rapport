@@ -5,4 +5,11 @@ jobs:
       - image: raabf/latex-versions:texlive2018
     steps:
       - checkout
-      - run: cd Rapport && pdflatex -interaction=nonstopmode rapport.tex
+      - run:
+          name: "Build Rapport/rapport.tex"
+          commad: |
+            cd Rapport;
+            pdflatex -interaction=nonstopmode rapport.tex;
+      - store_artifacts:
+          path: Rapport/rapport.pdf
+        
