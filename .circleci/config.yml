@@ -5,12 +5,13 @@ jobs:
       - image: raabf/latex-versions:texlive2018
     steps:
       - checkout
+      - run: mkdir /Documents
       - run:
           name: "Build: Rapport de stage"
           command: |
             cd Rapport;
             pdflatex -interaction=nonstopmode rapport.tex;
-            mv rapport.pdf /Documents;
+            cp rapport.pdf /Documents;
       - store_artifacts:
           path: /Documents/rapport.pdf
       - run:
@@ -18,7 +19,7 @@ jobs:
           command: |
             cd Rapport-d-etonnement;
             pdflatex -interaction=nonstopmode rapport-d-etonnement.tex;
-            mv rapport-d-etonnement.pdf /Documents;
+            cp rapport-d-etonnement.pdf /Documents;
       - store_artifacts:
           path: /Documents/rapport-d-etonnement.pdf
       - run:
@@ -26,7 +27,7 @@ jobs:
           command: |
             cd Dossier-PFI;
             pdflatex -interaction=nonstopmode dossier-pfi.tex;
-            mv dossier-pfi.pdf /Documents;
+            cp dossier-pfi.pdf /Documents;
       - store_artifacts:
           path: /Documents/dossier-pfi.pdf
         
