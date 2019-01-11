@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run:
           name: "Build Rapport/rapport.tex"
-          commad: |
+          command: |
             cd Rapport;
             pdflatex -interaction=nonstopmode rapport.tex;
       - store_artifacts:
